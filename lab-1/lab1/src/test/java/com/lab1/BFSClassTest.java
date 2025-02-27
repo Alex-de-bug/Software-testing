@@ -232,8 +232,10 @@ public class BFSClassTest {
     @Test
     public void testGraph_fromFile() {
         File file = new File(FILE_PATH);
+        String absolutePath = file.getAbsolutePath();
 
         if (!file.exists()) {
+            System.out.println("File not found: " + absolutePath + ". Tests count as passed.");
             return;
         }
 
@@ -252,6 +254,7 @@ public class BFSClassTest {
 
                 String start = testCase.get("start").asText();
                 String target = testCase.get("target").asText();
+
                 List<String> expectedPath = new ArrayList<>();
                 for (JsonNode node : testCase.get("expected")) {
                     expectedPath.add(node.asText());

@@ -2,10 +2,17 @@ package com.lab1;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
+
+import java.io.File;
 
 
 public class CosClassTest {
+
+    private static final String FILE_PATH = "tests/cos.tests.json";
 
     private static final double EPSILON = 1e-6;
 
@@ -134,6 +141,35 @@ public class CosClassTest {
             double actual = CosClass.cos(x, 15);
 
             assertEquals(expected, actual, EPSILON);
+        }
+    }
+
+    @Test
+    public void testCos_fromFile() {
+        File file = new File(FILE_PATH);
+        String absolutePath = file.getAbsolutePath();
+
+        if (!file.exists()) {
+            System.out.println("File not found: " + absolutePath + ". Tests count as passed.");
+            return;
+        }
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode testCases = objectMapper.readTree(file);
+
+            for (JsonNode testCase : testCases) {
+                double x = testCase.get("x").asDouble();
+                int iterations = testCase.get("iterations").asInt();
+
+                double expected = testCase.get("expected").asDouble();
+                double actual = CosClass.cos(x, iterations);
+
+                assertEquals(expected, actual, EPSILON);
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error while loading JSON tests for Cos: " + e.getMessage(), e);
         }
     }
 }
