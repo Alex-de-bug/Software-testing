@@ -3,16 +3,12 @@ package com.lab1.task3;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+import org.junit.After;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
-
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
-
-
-
-
 
 public class ZafodStoryTest {
     
@@ -20,10 +16,15 @@ public class ZafodStoryTest {
     private final ByteArrayOutputStream outputCapture = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
     
-    @BeforeEach
+    @Before
     public void setUp() {
         System.setOut(new PrintStream(outputCapture));
         story = new ZafodStory();
+    }
+    
+    @After
+    public void restoreSystemOutput() {
+        System.setOut(originalOut);
     }
     
     @Test
