@@ -1,0 +1,40 @@
+[
+    {
+        "connections": [
+            { "from": "A", "to": "B" },
+            { "from": "B", "to": "C" },
+            { "from": "C", "to": "D" }
+        ],
+        "start": "A",
+        "target": "D",
+        "expected": ["A", "B", "C", "D"]
+    },
+    {
+        "connections": [
+            { "from": "X", "to": "Y" },
+            { "from": "Y", "to": "Z" }
+        ],
+        "start": "X",
+        "target": "Z",
+        "expected": ["X", "Y", "Z"]
+    },
+    {
+        "connections": [
+            { "from": "1", "to": "2" },
+            { "from": "2", "to": "3" },
+            { "from": "3", "to": "1" }
+        ],
+        "start": "1",
+        "target": "3",
+        "expected": ["1", "2", "3"]
+    },
+    {
+        "connections": [
+            { "from": "A", "to": "B" },
+            { "from": "C", "to": "D" }
+        ],
+        "start": "A",
+        "target": "D",
+        "expected": []
+    }
+]

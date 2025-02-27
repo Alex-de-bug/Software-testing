@@ -1,13 +1,19 @@
 package com.lab1;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lab1.util.Graph;
 import org.junit.Test;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
 public class BFSClassTest {
+
+    private static final String FILE_PATH = "tests/graph.tests.json";
 
     private Graph oneWayGraph() {
         Graph graph = new Graph();
@@ -221,5 +227,43 @@ public class BFSClassTest {
         String[] actual = BFSClass.bfs(graph, "C", "A");
 
         assertEquals(List.of(expected), List.of(actual));
+    }
+
+    @Test
+    public void testGraph_fromFile() {
+        File file = new File(FILE_PATH);
+
+        if (!file.exists()) {
+            return;
+        }
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode testCases = objectMapper.readTree(file);
+
+            for (JsonNode testCase : testCases) {
+                Graph graph = new Graph();
+
+                for (JsonNode connection : testCase.get("connections")) {
+                    String from = connection.get("from").asText();
+                    String to = connection.get("to").asText();
+                    graph.addEdge(from, to);
+                }
+
+                String start = testCase.get("start").asText();
+                String target = testCase.get("target").asText();
+                List<String> expectedPath = new ArrayList<>();
+                for (JsonNode node : testCase.get("expected")) {
+                    expectedPath.add(node.asText());
+                }
+
+                String[] actual = BFSClass.bfs(graph, start, target);
+
+                assertEquals(expectedPath, List.of(actual));
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error while loading JSON tests for BFS: " + e.getMessage(), e);
+        }
     }
 }
