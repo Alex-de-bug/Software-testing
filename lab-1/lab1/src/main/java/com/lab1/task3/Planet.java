@@ -23,10 +23,6 @@ public class Planet {
         return this.horizonDistance;
     }
     
-    public double calculateSurfaceArea() {
-        return 4 * Math.PI * radius * radius;
-    }
-    
     public String describeView() {
         StringBuilder description = new StringBuilder();
         description.append("The ").append(surface.getMaterial().getDescription())
@@ -49,7 +45,6 @@ public class Planet {
         }
     }
     
-    // Getters and setters
     public String getName() {
         return name;
     }

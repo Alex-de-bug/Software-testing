@@ -42,13 +42,4 @@ public class ZafodStory {
     public Planet getGoldPlanet() {
         return goldPlanet;
     }
-    
-    public Universe getUniverse() {
-        return universe;
-    }
-    
-    public static void main(String[] args) {
-        ZafodStory story = new ZafodStory();
-        story.runStory();
-    }
 }

@@ -54,7 +54,6 @@ public class Universe {
         return count;
     }
     
-    // Getters
     public List<Planet> getPlanets() {
         return new ArrayList<>(planets);
     }
