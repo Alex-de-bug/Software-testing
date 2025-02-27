@@ -1,15 +1,16 @@
 package com.lab1;
 
-/**
- * Hello world!
- *
- */
-public class App 
+public class CosClass
 {
     public static double cos(double x, int iterations) {
         x = x % (2 * Math.PI);
-        if (x > Math.PI) x -= 2 * Math.PI;
-        if (x < -Math.PI) x += 2 * Math.PI;
+
+        if (x > Math.PI) {
+            x -= 2 * Math.PI;
+        }
+        if (x < -Math.PI) {
+            x += 2 * Math.PI;
+        }
         
         double result = 1.0; 
         double term = 1.0;
