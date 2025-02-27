@@ -16,14 +16,26 @@ public class Surface {
     }
     
     public String getDescription() {
-        return "A " + material.getDescription() + " surface that extends for " + area + " square units";
+        return "A " + material.getDescription() + " surface that extends for " + 
+                String.format("%.2f", area) + " square units";
     }
     
     public boolean isShiny() {
         return material.getReflectivity() > 0.7;
     }
     
-    // Getters and setters
+    public String describeExtent() {
+        StringBuilder description = new StringBuilder();
+        description.append("A continuous ").append(material.getDescription())
+                   .append(" surface extending in all directions to the horizon. ");
+        
+        if (material == Material.GOLD) {
+            description.append("It glitters with unmatched brilliance.");
+        }
+        
+        return description.toString();
+    }
+    
     public Material getMaterial() {
         return material;
     }

@@ -8,6 +8,7 @@ public class Creature {
     private Eyes eyes;
     private Mouth mouth;
     private Throat throat;
+    private boolean isStanding;
     
     public Creature(String name, double height, double weight) {
         this.name = name;
@@ -17,15 +18,40 @@ public class Creature {
         this.eyes = new Eyes();
         this.mouth = new Mouth();
         this.throat = new Throat();
+        this.isStanding = false;
     }
     
     public void jump() {
         System.out.println(name + " jumped up lightly like a ballet dancer.");
     }
     
+    public void jumpToFeet() {
+        if (!isStanding) {
+            isStanding = true;
+            System.out.println(name + " jumped to their feet as lightly as a ballet dancer.");
+        } else {
+            System.out.println(name + " is already standing.");
+        }
+    }
+    
     public void lookAround() {
         eyes.scan();
         System.out.println(name + " is looking around.");
+    }
+    
+    public void observeSurroundings(Planet planet) {
+        if (!eyes.isOpen) {
+            eyes.open();
+        }
+        
+        String view = planet.describeView();
+        System.out.println(name + " observes: " + view);
+        
+        if (planet.getSurface().isShiny()) {
+            double shininess = planet.getSurface().calculateShine(1.0);
+            System.out.println("The surface shines with intensity of " + shininess + 
+                               ", unlike anything else in the Universe.");
+        }
     }
     
     public void move(double x, double y, double z) {
@@ -35,7 +61,15 @@ public class Creature {
         System.out.println(name + " moved to position: " + position);
     }
     
-    // Nested classes for body parts
+    public void lieDown() {
+        if (isStanding) {
+            isStanding = false;
+            System.out.println(name + " lies down on the surface.");
+        } else {
+            System.out.println(name + " is already lying down.");
+        }
+    }
+    
     public class Eyes {
         private boolean isOpen;
         
@@ -59,6 +93,10 @@ public class Creature {
             } else {
                 System.out.println(name + " can't see with closed eyes.");
             }
+        }
+        
+        public boolean isOpened() {
+            return isOpen;
         }
     }
     
@@ -86,6 +124,11 @@ public class Creature {
                 System.out.println(name + " tries to speak with closed mouth.");
             }
         }
+        
+        public void gasp() {
+            isOpen = true;
+            System.out.println(name + " gasps in awe.");
+        }
     }
     
     public class Throat {
@@ -98,7 +141,6 @@ public class Creature {
         }
     }
     
-    // Getters and setters
     public String getName() {
         return name;
     }
@@ -141,5 +183,9 @@ public class Creature {
 
     public Throat getThroat() {
         return throat;
+    }
+    
+    public boolean isStanding() {
+        return isStanding;
     }
 }
