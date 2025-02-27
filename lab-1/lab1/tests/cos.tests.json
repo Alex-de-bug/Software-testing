@@ -1,0 +1,17 @@
+[
+    {
+        "x": 0,
+        "iterations": 15,
+        "expected": 1.0
+    },
+    {
+        "x": 1.57079632679,
+        "iterations": 15,
+        "expected": 0.0
+    },
+    {
+        "x": 3.14159265359,
+        "iterations": 15,
+        "expected": -1.0
+    }
+]
