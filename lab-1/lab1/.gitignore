@@ -95,7 +95,7 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-# Editor-based Resthttps://github.com/Alex-de-bug/Software-testing Client
+# Editor-based Rest Client
 .idea/httpRequests
 
 # Android studio 3.1+ serialized cache file
