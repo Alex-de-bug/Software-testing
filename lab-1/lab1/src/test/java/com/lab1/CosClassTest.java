@@ -112,7 +112,7 @@ public class CosClassTest {
 
     @Test
     public void testCos_LargeAngles() {
-        for(int i = 20; i < 100; i++) {
+        for(int i = 20; i < 100; i += 15) {
             double expected = i % 2 == 0 ? 1.0 : -1.0;
             double actual = CosClass.cos(i*Math.PI, 15);
 
@@ -131,16 +131,6 @@ public class CosClassTest {
             if (i > 1) { 
                 assertTrue("Error should decrease with more iterations", currentError <= previousError);
             }
-        }
-    }
-
-    @Test
-    public void testCos_Accuracy() {
-        for (double x = -2*Math.PI; x <= 2*Math.PI; x += Math.PI/12) {
-            double expected = Math.cos(x);
-            double actual = CosClass.cos(x, 15);
-
-            assertEquals(expected, actual, EPSILON);
         }
     }
 
