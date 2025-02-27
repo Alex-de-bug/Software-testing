@@ -68,7 +68,7 @@ public class BFSClassTest {
         Graph graph = oneWayGraph();
 
         String[] expected = new String[0];
-        String[] actual = BFSClass.bfs(graph, "F", "E");
+        String[] actual = BFSClass.bfs(graph, "F", "A");
 
         assertEquals(List.of(expected), List.of(actual));
     }
