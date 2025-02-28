@@ -51,7 +51,7 @@ public class BFSClassTest {
     }
 
     @Test    
-    public void testOneWayGraph_fromStartToEnd_thenPath() {
+    public void testBFS_oneWay_fromStartToEnd_thenPath() {
         Graph graph = oneWayGraph();
 
         String[] expected = {"A", "B", "C", "D", "E", "F"};
@@ -61,7 +61,7 @@ public class BFSClassTest {
     }
 
     @Test
-    public void testOneWayGraph_fromEndToStart_thenNoPath() {
+    public void testBFS_oneWay_fromEndToStart_thenNoPath() {
         Graph graph = oneWayGraph();
 
         String[] expected = new String[0];
@@ -71,7 +71,7 @@ public class BFSClassTest {
     }
 
     @Test
-    public void testOneWayGraph_invalidEnd_thenNoPath() {
+    public void testBFS_oneWay_invalidEnd_thenNoPath() {
         Graph graph = oneWayGraph();
 
         String[] expected = new String[0];
@@ -81,7 +81,7 @@ public class BFSClassTest {
     }
 
     @Test
-    public void testOneWayGraph_invalidStart_thenNoPath() {
+    public void testBFS_oneWay_invalidStart_thenNoPath() {
         Graph graph = oneWayGraph();
 
         String[] expected = new String[0];
@@ -91,7 +91,7 @@ public class BFSClassTest {
     }
 
     @Test
-    public void testOneWayGraph_fromThirdToEnd_thenCutPath() {
+    public void testBFS_oneWay_fromThirdToEnd_thenCutPath() {
         Graph graph = oneWayGraph();
 
         String[] expected = {"C", "D", "E", "F"};
@@ -101,7 +101,7 @@ public class BFSClassTest {
     }
 
     @Test
-    public void testOneWayGraph_fromStartToFourth_thenCutPath() {
+    public void testBFS_oneWay_fromStartToFourth_thenCutPath() {
         Graph graph = oneWayGraph();
 
         String[] expected = {"A", "B", "C", "D"};
@@ -111,7 +111,7 @@ public class BFSClassTest {
     }
 
     @Test
-    public void testOneWayGraph_fromSamePoint_thenPoint() {
+    public void testBFS_oneWay_fromSamePoint_thenPoint() {
         Graph graph = oneWayGraph();
 
         String[] expected = {"B"};
@@ -121,7 +121,7 @@ public class BFSClassTest {
     }
 
     @Test
-    public void testCycleGraph_fromStartToEnd_thenPath() {
+    public void testBFS_cycle_fromStartToEnd_thenPath() {
         Graph graph = cycleGraph();
 
         String[] expected = {"A", "B", "C"};
@@ -131,7 +131,7 @@ public class BFSClassTest {
     }
 
     @Test
-    public void testCycleGraph_invalidEnd_thenNoPath() {
+    public void testBFS_cycle_invalidEnd_thenNoPath() {
         Graph graph = cycleGraph();
 
         String[] expected = {};
@@ -141,7 +141,7 @@ public class BFSClassTest {
     }
 
     @Test
-    public void testDisconnectedGraph_invalidPath_thenNoPath() {
+    public void testBFS_disconnected_invalidPath_thenNoPath() {
         Graph graph = disconnectedGraph();
 
         String[] expected = new String[0];
@@ -151,7 +151,7 @@ public class BFSClassTest {
     }
 
     @Test
-    public void testTreeGraph_fromStartToEnd_thenPath() {
+    public void testBFS_tree_fromStartToEnd_thenPath() {
         Graph graph = treeGraph();
 
         String[] expected = {"A", "C", "F"};
@@ -161,7 +161,7 @@ public class BFSClassTest {
     }
 
     @Test
-    public void testTreeGraph_fromDifferentEdge_thenNoPath() {
+    public void testBFS_tree_fromDifferentEdge_thenNoPath() {
         Graph graph = treeGraph();
 
         String[] expected = {};
@@ -171,7 +171,7 @@ public class BFSClassTest {
     }
 
     @Test
-    public void testGraph_fromFile() {
+    public void testBFS_fromFile() {
         File file = new File(FILE_PATH);
         String absolutePath = file.getAbsolutePath();
 

@@ -24,7 +24,7 @@ public class SurfaceClassTest {
     }
     
     @Test
-    public void testConstructor() {
+    public void testStory_surface_constructor() {
         assertEquals(Material.GOLD, goldSurface.getMaterial());
         assertTrue(goldSurface.getMaterial().isMetallic());
         assertEquals(1000.0, goldSurface.getArea(), 0.001);
@@ -32,7 +32,7 @@ public class SurfaceClassTest {
     }
     
     @Test
-    public void testCalculateShineForGold() {
+    public void testStory_surface_calculateShineForGold() {
         double shine = goldSurface.calculateShine(1.0);
         assertEquals(0.95, shine, 0.001);
         
@@ -41,14 +41,14 @@ public class SurfaceClassTest {
     }
     
     @Test
-    public void testCalculateShineForDifferentMaterials() {
+    public void testStory_surface_calculateShineForDifferentMaterials() {
         assertEquals(0.25, rockSurface.calculateShine(1.0), 0.001); // Rock reflectivity = 0.25
         assertEquals(0.90, silverSurface.calculateShine(1.0), 0.001); // Silver reflectivity = 0.90
         assertEquals(0.15, soilSurface.calculateShine(1.0), 0.001); // Soil reflectivity = 0.15
     }
     
     @Test
-    public void testGetDescriptionFormat() {
+    public void testStory_surface_getDescriptionFormat() {
         String goldDescription = goldSurface.getDescription();
         assertTrue(goldDescription.startsWith("A golden surface"));
         assertTrue(goldDescription.contains("1000.00"));
@@ -60,7 +60,7 @@ public class SurfaceClassTest {
     }
     
     @Test
-    public void testIsShiny() {
+    public void testStory_surface_isShiny() {
         assertTrue(goldSurface.isShiny());  
         assertTrue(silverSurface.isShiny()); 
         assertFalse(rockSurface.isShiny()); 
@@ -68,7 +68,7 @@ public class SurfaceClassTest {
     }
     
     @Test
-    public void testDescribeExtentForGold() {
+    public void testStory_surface_describeExtentForGold() {
         String goldExtent = goldSurface.describeExtent();
         assertTrue(goldExtent.contains("continuous golden surface"));
         assertTrue(goldExtent.contains("extending in all directions"));
@@ -76,7 +76,7 @@ public class SurfaceClassTest {
     }
     
     @Test
-    public void testDescribeExtentForOtherMaterials() {
+    public void testStory_surface_describeExtentForOtherMaterials() {
         String rockExtent = rockSurface.describeExtent();
         assertTrue(rockExtent.contains("continuous rocky surface"));
         assertTrue(rockExtent.contains("extending in all directions"));
@@ -84,7 +84,7 @@ public class SurfaceClassTest {
     }
     
     @Test
-    public void testSetAndGetMaterial() {
+    public void testStory_surface_setAndGetMaterial() {
         Surface surface = new Surface(Material.GOLD, 100.0);
         assertEquals(Material.GOLD, surface.getMaterial());
         assertEquals("golden", surface.getMaterial().toString());
@@ -95,7 +95,7 @@ public class SurfaceClassTest {
     }
     
     @Test
-    public void testSetAndGetArea() {
+    public void testStory_surface_setAndGetArea() {
         Surface surface = new Surface(Material.ROCK, 100.0);
         assertEquals(100.0, surface.getArea(), 0.001);
         
@@ -104,7 +104,7 @@ public class SurfaceClassTest {
     }
     
     @Test
-    public void testSetAndGetVisibility() {
+    public void testStory_surface_setAndGetVisibility() {
         Surface surface = new Surface(Material.SOIL, 100.0);
         assertTrue(surface.isVisible());
         
@@ -113,26 +113,26 @@ public class SurfaceClassTest {
     }
     
     @Test
-    public void testWithZeroArea() {
+    public void testStory_surface_withZeroArea() {
         Surface zeroSurface = new Surface(Material.GOLD, 0);
         assertEquals(0, zeroSurface.getArea(), 0.001);
         assertEquals("A golden surface that extends for 0.00 square units", zeroSurface.getDescription());
     }
     
     @Test
-    public void testWithNegativeArea() {
+    public void testStory_surface_withNegativeArea() {
         Surface negativeSurface = new Surface(Material.GOLD, -100);
         assertEquals(-100, negativeSurface.getArea(), 0.001);
         assertEquals("A golden surface that extends for -100.00 square units", negativeSurface.getDescription());
     }
     
     @Test
-    public void testCalculateShineWithZeroLightIntensity() {
+    public void testStory_surface_calculateShineWithZeroLightIntensity() {
         assertEquals(0, goldSurface.calculateShine(0), 0.001);
     }
     
     @Test
-    public void testCalculateShineWithNegativeLightIntensity() {
+    public void testStory_surface_calculateShineWithNegativeLightIntensity() {
         assertEquals(-0.95, goldSurface.calculateShine(-1.0), 0.001);
     }
 }
