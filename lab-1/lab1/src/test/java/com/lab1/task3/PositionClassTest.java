@@ -9,7 +9,7 @@ public class PositionClassTest {
     private static final double DELTA = 0.00001;
     
     @Test
-    public void testCoordinateAccessors() {
+    public void testStory_position_coordinateAccessors() {
         Position position = new Position(1.0, 2.0, 3.0);
         assertEquals(1.0, position.getX(), DELTA);
         assertEquals(2.0, position.getY(), DELTA);
@@ -39,7 +39,7 @@ public class PositionClassTest {
     
 
     @Test
-    public void testDistanceScenarios() {
+    public void testStory_position_distanceScenarios() {
         Position origin = new Position(0.0, 0.0, 0.0);
         Position point1 = new Position(3.0, 4.0, 0.0);
         Position point2 = new Position(3.0, 4.0, 12.0);
@@ -63,7 +63,7 @@ public class PositionClassTest {
     
 
     @Test
-    public void testToStringFormatting() {
+    public void testStory_position_toStringFormatting() {
         Position[] positions = {
             new Position(1.0, 2.0, 3.0),
             new Position(1.5, 2.5, 3.5),
@@ -87,7 +87,7 @@ public class PositionClassTest {
     }
     
     @Test
-    public void testEdgeCases() {
+    public void testStory_position_edgeCases() {
         Position veryLarge1 = new Position(1.0E9, 2.0E9, 3.0E9);
         Position veryLarge2 = new Position(1.0E9 + 3.0, 2.0E9 + 4.0, 3.0E9);
         assertEquals(5.0, veryLarge1.distanceTo(veryLarge2), DELTA);

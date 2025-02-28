@@ -40,7 +40,7 @@ public class CommunityClassTest {
     
 
     @Test
-    public void testConstructorAndBasicAccessors() {
+    public void testStory_community_constructorAndBasicAccessors() {
         assertEquals("Test Community", community.getName());
         assertSame(testPlanet, community.getHabitat());
         assertEquals(0, community.getMemberCount());
@@ -56,7 +56,7 @@ public class CommunityClassTest {
     
 
     @Test
-    public void testMemberManagement() {
+    public void testStory_community_memberManagement() {
         community.addMember(creature1);
         assertEquals(1, community.getMemberCount());
         assertTrue(community.getMembers().contains(creature1));
@@ -87,7 +87,7 @@ public class CommunityClassTest {
     
 
     @Test
-    public void testMembersListEncapsulation() {
+    public void testStory_community_memberListEncapsulation() {
         community.addMember(creature1);
         community.addMember(creature2);
         
@@ -106,7 +106,7 @@ public class CommunityClassTest {
     
 
     @Test
-    public void testMembersOrder() {
+    public void testStory_community_memberOrder() {
         community.addMember(creature1); // Alice
         community.addMember(creature2); // Bob
         community.addMember(creature3); // Charlie
@@ -119,7 +119,7 @@ public class CommunityClassTest {
     
 
     @Test
-    public void testIntegrationWithCreatureAndPlanet() {
+    public void testStory_community_integrationWithCreatureAndPlanet() {
         community.addMember(creature1);
         
         creature1.observeSurroundings(community.getHabitat());
@@ -138,7 +138,7 @@ public class CommunityClassTest {
     
 
     @Test
-    public void testEdgeCases() {
+    public void testStory_community_edgeCases() {
         Community emptyNameCommunity = new Community("", testPlanet);
         assertEquals("", emptyNameCommunity.getName());
         
