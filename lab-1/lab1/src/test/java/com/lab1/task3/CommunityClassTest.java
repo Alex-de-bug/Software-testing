@@ -3,6 +3,7 @@ package com.lab1.task3;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
@@ -25,7 +26,7 @@ public class CommunityClassTest {
     @Before
     public void setUp() {
         System.setOut(new PrintStream(outputCapture));
-        
+        Locale.setDefault(Locale.US);
         testPlanet = new Planet("Test Planet", 6000.0, Material.ROCK, 8.0);
         community = new Community("Test Community", testPlanet);
         creature1 = new Creature("Alice", 1.7, 65.0);

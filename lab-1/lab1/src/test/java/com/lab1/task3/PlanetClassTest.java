@@ -1,5 +1,7 @@
 package com.lab1.task3;
 
+import java.util.Locale;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -17,6 +19,7 @@ public class PlanetClassTest {
     
     @Before
     public void setUp() {
+        Locale.setDefault(Locale.US);
         goldPlanet = new Planet("Gold Planet", 6371.0, Material.GOLD, 9.8);
         rockPlanet = new Planet("Rocky World", 3400.0, Material.ROCK, 3.7);
         waterPlanet = new Planet("Water World", 12000.0, Material.WATER, 10.5);

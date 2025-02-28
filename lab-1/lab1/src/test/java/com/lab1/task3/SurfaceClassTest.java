@@ -1,5 +1,7 @@
 package com.lab1.task3;
 
+import java.util.Locale;
+
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,6 +16,7 @@ public class SurfaceClassTest {
     
     @Before
     public void setUp() {
+        Locale.setDefault(Locale.US);
         goldSurface = new Surface(Material.GOLD, 1000.0);
         rockSurface = new Surface(Material.ROCK, 500.0);
         silverSurface = new Surface(Material.SILVER, 750.0);

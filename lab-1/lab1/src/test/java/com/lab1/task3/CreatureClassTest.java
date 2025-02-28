@@ -2,6 +2,7 @@ package com.lab1.task3;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Locale;
 
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
@@ -23,7 +24,7 @@ public class CreatureClassTest {
     @Before
     public void setUp() {
         System.setOut(new PrintStream(outputCapture));
-        
+        Locale.setDefault(Locale.US);
         zafod = new Creature("Zafod", 1.85, 75.0);
         goldPlanet = new Planet("Golden Planet", 6371.0, Material.GOLD, 9.8);
     }

@@ -2,11 +2,20 @@ package com.lab1.task3;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import java.util.Locale;
+
+import org.junit.Before;
 import org.junit.Test;
 
 public class PositionClassTest {
     
     private static final double DELTA = 0.00001;
+
+    @Before
+    public void setUp(){
+        Locale.setDefault(Locale.US);
+    }
     
     @Test
     public void testCoordinateAccessors() {
