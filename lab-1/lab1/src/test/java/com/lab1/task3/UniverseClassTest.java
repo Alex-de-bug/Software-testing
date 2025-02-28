@@ -43,7 +43,7 @@ public class UniverseClassTest {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
         
         resetSingleton();
         universe = Universe.getInstance();
