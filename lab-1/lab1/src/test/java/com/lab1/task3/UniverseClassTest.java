@@ -66,7 +66,7 @@ public class UniverseClassTest {
     }
 
     @Test
-    public void testAddAndRemovePlanet() {
+    public void testStory_universe_addAndRemovePlanet() {
         assertEquals(0, universe.getPlanets().size());
         
         universe.addPlanet(mockPlanet1);
@@ -82,7 +82,7 @@ public class UniverseClassTest {
     }
 
     @Test
-    public void testAddAndRemoveCommunity() {
+    public void testStory_universe_addAndRemoveCommunity() {
         assertEquals(0, universe.getCommunities().size());
         
         universe.addCommunity(mockCommunity1);
@@ -98,7 +98,7 @@ public class UniverseClassTest {
     }
 
     @Test
-    public void testFindShinyPlanets() {
+    public void testStory_universe_findShinyPlanets() {
         universe.addPlanet(mockPlanet1); // shiny
         universe.addPlanet(mockPlanet2); // not shiny
         universe.addPlanet(mockPlanet3); // shiny
@@ -122,7 +122,7 @@ public class UniverseClassTest {
     }
     
     @Test
-    public void testGetTotalCreatureCount() {
+    public void testStory_universe_getTotalCreatureCount() {
         universe.addCommunity(mockCommunity1); 
         universe.addCommunity(mockCommunity2); 
         
@@ -135,7 +135,7 @@ public class UniverseClassTest {
     }
     
     @Test
-    public void testGetPlanetsReturnsCopy() {
+    public void testStory_universe_getPlanetsReturnsCopy() {
         universe.addPlanet(mockPlanet1);
         
         List<Planet> planets = universe.getPlanets();
@@ -145,7 +145,7 @@ public class UniverseClassTest {
     }
     
     @Test
-    public void testGetCommunitiesReturnsCopy() {
+    public void testStory_universe_getCommunitiesReturnsCopy() {
         universe.addCommunity(mockCommunity1);
         
         List<Community> communities = universe.getCommunities();

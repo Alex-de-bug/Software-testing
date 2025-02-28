@@ -27,7 +27,7 @@ public class PlanetClassTest {
 
 
     @Test
-    public void testDescribeView() {
+    public void testStory_planet_describeView() {
         String goldDescription = goldPlanet.describeView();
         assertTrue(goldDescription.contains("The golden planet Gold Planet extends"));
         assertTrue(goldDescription.contains("horizon in all directions"));
@@ -46,7 +46,7 @@ public class PlanetClassTest {
     
 
     @Test
-    public void testDescribeUniqueness() {
+    public void testStory_planet_describeUniqueness() {
         String goldUniqueness = goldPlanet.describeUniqueness();
         assertTrue(goldUniqueness.contains("nothing else in the Universe can compare"));
         assertTrue(goldUniqueness.contains("impossible to find a suitable comparison"));
@@ -62,7 +62,7 @@ public class PlanetClassTest {
 
 
     @Test
-    public void testAccessors() {
+    public void testStory_planet_accessors() {
         assertEquals("Gold Planet", goldPlanet.getName());
         assertEquals(6371.0, goldPlanet.getRadius(), DELTA);
         assertEquals(9.8, goldPlanet.getGravity(), DELTA);
@@ -90,7 +90,7 @@ public class PlanetClassTest {
     
 
     @Test
-    public void testCalculateHorizonDistance() {
+    public void testStory_planet_calculateHorizonDistance() {
         double horizonForShortPerson = goldPlanet.calculateHorizonDistance(1.5);
         double horizonForTallPerson = goldPlanet.calculateHorizonDistance(2.0);
         
@@ -111,7 +111,7 @@ public class PlanetClassTest {
     
 
     @Test
-    public void testDescribeViewAfterHorizonChange() {
+    public void testStory_planet_describeViewAfterHorizonChange() {
         goldPlanet.calculateHorizonDistance(5.0);
         double expectedDistance = Math.sqrt(2 * 6371.0 * 5.0 + 5.0*5.0);
         
@@ -123,7 +123,7 @@ public class PlanetClassTest {
     
 
     @Test
-    public void testEdgeCases() {        
+    public void testStory_planet_edgeCases() {
         Planet zeroGravityPlanet = new Planet("Zero-G", 1000.0, Material.IRON, 0.0);
         assertEquals(0.0, zeroGravityPlanet.getGravity(), DELTA);
         

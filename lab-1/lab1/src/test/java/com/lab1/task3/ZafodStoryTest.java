@@ -28,7 +28,7 @@ public class ZafodStoryTest {
     }
     
     @Test
-    public void testZafodJumpsToFeet() {
+    public void testStory_zafod_JumpsToFeet() {
         assertFalse(story.getZafod().isStanding());
         
         story.getZafod().jumpToFeet();
@@ -39,7 +39,7 @@ public class ZafodStoryTest {
     }
     
     @Test
-    public void testGoldSurfaceDescription() {
+    public void testStory_zafod_goldSurfaceDescription() {
         assertEquals(Material.GOLD, story.getGoldPlanet().getSurface().getMaterial());
         
         String uniqueness = story.getGoldPlanet().describeUniqueness();
@@ -51,7 +51,7 @@ public class ZafodStoryTest {
     }
     
     @Test
-    public void testFullStorySequence() {
+    public void testStory_zafod_fullStorySequence() {
         story.runStory();
         
         String output = outputCapture.toString();
@@ -63,7 +63,7 @@ public class ZafodStoryTest {
     }
     
     @Test
-    public void testPlanetHorizonCalculation() {
+    public void testStory_zafod_planetHorizonCalculation() {
         double horizonForShortPerson = story.getGoldPlanet().calculateHorizonDistance(1.5);
         double horizonForTallPerson = story.getGoldPlanet().calculateHorizonDistance(2.0);
         

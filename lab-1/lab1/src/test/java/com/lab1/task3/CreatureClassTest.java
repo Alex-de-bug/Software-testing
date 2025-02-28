@@ -36,7 +36,7 @@ public class CreatureClassTest {
     
 
     @Test
-    public void testCreatureCreationAndBasicAccessors() {
+    public void testStory_creature_creationAndBasicAccessors() {
         assertEquals("Zafod", zafod.getName());
         assertEquals(1.85, zafod.getHeight(), DELTA);
         assertEquals(75.0, zafod.getWeight(), DELTA);
@@ -60,7 +60,7 @@ public class CreatureClassTest {
     
 
     @Test
-    public void testMovementMethods() {
+    public void testStory_creature_movementMethods() {
         zafod.jump();
         assertTrue(outputCapture.toString().contains("jumped up lightly like a ballet dancer"));
         
@@ -102,7 +102,7 @@ public class CreatureClassTest {
     
 
     @Test
-    public void testEyesFunctionality() {
+    public void testStory_creature_eyesFunctionality() {
         Creature.Eyes eyes = zafod.getEyes();
         
         assertTrue(eyes.isOpened());
@@ -130,7 +130,7 @@ public class CreatureClassTest {
     
 
     @Test
-    public void testMouthFunctionality() {
+    public void testStory_creature_mouthFunctionality() {
         Creature.Mouth mouth = zafod.getMouth();
         
         mouth.open();
@@ -159,7 +159,7 @@ public class CreatureClassTest {
     
 
     @Test
-    public void testThroatFunctionality() {
+    public void testStory_creature_throatFunctionality() {
         Creature.Throat throat = zafod.getThroat();
         
         throat.swallow();
@@ -173,7 +173,7 @@ public class CreatureClassTest {
     
 
     @Test
-    public void testObserveSurroundings() {
+    public void testStory_creature_observeSurroundings() {
         zafod.getEyes().close();
         outputCapture.reset();
         
@@ -191,7 +191,7 @@ public class CreatureClassTest {
     
 
     @Test
-    public void testZafodScenario() {
+    public void testStory_creature_zafodScenario() {
         assertFalse(zafod.isStanding());
         
         zafod.jumpToFeet();
