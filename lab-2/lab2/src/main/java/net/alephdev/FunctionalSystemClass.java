@@ -1,7 +1,11 @@
 package net.alephdev;
 
-import static net.alephdev.TrigonometricClass.*;
-import static net.alephdev.LogarithmicClass.*;
+import static net.alephdev.logariphmic.AnyLogarithm.logN;
+import static net.alephdev.logariphmic.BaseELogarithm.ln;
+import static net.alephdev.trigonometric.CosClass.cos;
+import static net.alephdev.trigonometric.CotClass.cot;
+import static net.alephdev.trigonometric.SecClass.sec;
+import static net.alephdev.trigonometric.TanClass.tan;
 
 public class FunctionalSystemClass {
     public static double negative(double x, int iterations) {
