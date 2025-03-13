@@ -2,17 +2,17 @@ package net.alephdev.function.logariphmic;
 
 import net.alephdev.function.IterableFunction;
 
-public class AnyLogarithm extends IterableFunction{
+public class AnyLogarithm extends IterableFunction {
 
     private final BaseELogarithm baseELogarithm;
     private final int base;
 
-    public AnyLogarithm(final int base){
+    public AnyLogarithm(final int base) {
         this.baseELogarithm = new BaseELogarithm();
         this.base = base;
     }
 
-    public AnyLogarithm(final int base, final BaseELogarithm baseELogarithm){
+    public AnyLogarithm(final int base, final BaseELogarithm baseELogarithm) {
         super();
         this.baseELogarithm = baseELogarithm;
         this.base = base;

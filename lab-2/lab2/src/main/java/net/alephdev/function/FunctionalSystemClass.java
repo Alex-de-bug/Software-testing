@@ -9,14 +9,14 @@ import net.alephdev.function.trigonometric.TanClass;
 
 public class FunctionalSystemClass extends IterableFunction{
 
-    private CosClass cos = new CosClass();
-    private CotClass cot = new CotClass();
-    private TanClass tan = new TanClass();
-    private SecClass sec = new SecClass();
+    private final CosClass cos;
+    private final CotClass cot;
+    private final TanClass tan;
+    private final SecClass sec;
 
-    private AnyLogarithm log3 = new AnyLogarithm(3);
-    private AnyLogarithm log5 = new AnyLogarithm(5);
-    private BaseELogarithm logE = new BaseELogarithm();
+    private final AnyLogarithm log3;
+    private final AnyLogarithm log5;
+    private final BaseELogarithm logE;
 
     public FunctionalSystemClass(){
         this.cos = new CosClass();
@@ -29,8 +29,15 @@ public class FunctionalSystemClass extends IterableFunction{
         this.logE = new BaseELogarithm();
     }
 
-    public FunctionalSystemClass(final CosClass cos, final CotClass cot, final TanClass tan, final SecClass sec, 
-        final AnyLogarithm log3, final AnyLogarithm log5, final BaseELogarithm logE){
+    public FunctionalSystemClass(
+            final CosClass cos,
+            final CotClass cot,
+            final TanClass tan,
+            final SecClass sec,
+            final AnyLogarithm log3,
+            final AnyLogarithm log5,
+            final BaseELogarithm logE
+    ){
         this.cos = cos;
         this.cot = cot;
         this.tan = tan;
