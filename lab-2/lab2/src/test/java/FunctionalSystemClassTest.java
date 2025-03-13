@@ -50,7 +50,6 @@ class FunctionalSystemClassTest {
         -Math.PI / 2,    // cot(x) = 0 (undefined in negative domain)
         0.0,             // Boundary case
         1.0,             // log3(x) = 0 (undefined in positive domain)
-        Math.PI,         // cot(x) = 0 (undefined in negative domain)
         -Math.PI         // cot(x) = 0 (undefined in negative domain)
     })
     void testErrorCases(double input) {
