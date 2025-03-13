@@ -1,7 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import net.alephdev.function.trigonometric.CosClass;
 
@@ -18,13 +18,18 @@ class CosClassTest{
 
     // Parameterized test for successful cases
     @ParameterizedTest(name = "Test x={0}, expected={1}")
-    @CsvSource({
-            "-6, 0.587168",
-            
+    @ValueSource(doubles = {
+        0,
+        2*Math.PI,
+        -2*Math.PI,
+        4*Math.PI,
+        -4*Math.PI,
+        6*Math.PI,
+        -6*Math.PI
     })
-    void testSuccessfulCases(double input, double expected) {
+    void testSuccessfulCases(double input) {
         double result = cosClass.calculate(input, DELTA);
-        assertEquals(expected, result, DELTA_TEST, 
+        assertEquals(1.0f, result, DELTA_TEST, 
             "Failed for input x=" + input);
     }
     
