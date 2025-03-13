@@ -7,12 +7,10 @@ public class SinClass extends IterableFunction {
     private final CosClass cos;
 
     public SinClass() {
-        super();
         this.cos = new CosClass();
     }
 
     public SinClass(final CosClass cos) {
-        super();
         this.cos = cos;
     }
 

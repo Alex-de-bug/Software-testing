@@ -4,10 +4,6 @@ import net.alephdev.function.IterableFunction;
 
 public class CosClass extends IterableFunction {
 
-    public CosClass() {
-        super();
-    }
-
     @Override
     public double calculate(final double arg, final double precision) {
         double result = 1.0; // Начальное значение результата (первый член ряда)

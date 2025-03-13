@@ -4,10 +4,6 @@ import net.alephdev.function.IterableFunction;
 
 public class BaseELogarithm extends IterableFunction {
 
-    public BaseELogarithm() {
-        super();
-    }
-
     @Override
     public double calculate(double arg, double precision) {
         if (arg <= 0) {

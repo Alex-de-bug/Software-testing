@@ -8,7 +8,4 @@ public abstract class IterableFunction extends Function {
 
     protected int iter;
 
-    protected IterableFunction(){
-        this.iter = DEFAULT_ITERATION;
-    }
 }

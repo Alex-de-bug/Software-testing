@@ -8,7 +8,6 @@ public class AnyLogarithm extends IterableFunction{
     private final int base;
 
     public AnyLogarithm(final int base){
-        super();
         this.baseELogarithm = new BaseELogarithm();
         this.base = base;
     }
