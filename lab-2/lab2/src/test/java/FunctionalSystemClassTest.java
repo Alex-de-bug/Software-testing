@@ -35,8 +35,22 @@ class FunctionalSystemClassTest {
     // Parameterized test for successful cases
     @ParameterizedTest(name = "Test x={0}, expected={1}")
     @CsvSource({
-        "-0.5, -185.85038",        // Negative domain test
-        "0.116076, -2.168387",     // Close to zero test
+            "-6, 0.587168",
+            "-5.94525, 0.276875",
+            "-5.915, 0.294296",
+            "-5.88383, 0.307632",
+            "-5.785, 0.179921",
+            "-5.68928, 0.056363",
+            "-5.584, 0.300098",
+            "-5.5, 0.830192",
+
+            "-3.775, -1.166686",
+            "-3.675, -0.81104",
+            "-3.624, -0.759569",
+            "-3.57, -0.711194",
+            "-3.515, -0.605007",
+            "-3.46579, -0.511809",
+            "-3.4, -1.447405"
     })
     void testSuccessfulCases(double input, double expected) {
         double result = funcSystem.calculate(input, DELTA);
