@@ -6,7 +6,7 @@ public class BaseELogarithm extends IterableFunction {
 
     @Override
     public double calculate(double arg, double precision) {
-        if (Math.abs(arg) <= EPSILON) {
+        if (Double.compare(arg, 0.0) <= 0 || Math.abs(arg) < EPSILON) {
             throw new ArithmeticException("Натуральный логарифм не определён для неположительных чисел: arg <= 0");
         }
 
