@@ -6,12 +6,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import net.alephdev.function.FunctionalSystemClass;
-import net.alephdev.function.logariphmic.AnyLogarithm;
-import net.alephdev.function.logariphmic.BaseELogarithm;
-import net.alephdev.function.trigonometric.CosClass;
-import net.alephdev.function.trigonometric.CotClass;
-import net.alephdev.function.trigonometric.SecClass;
-import net.alephdev.function.trigonometric.TanClass;
 
 class FunctionalSystemClassTest {
 
@@ -22,14 +16,7 @@ class FunctionalSystemClassTest {
 
     @BeforeEach
     void setUp() {
-        CosClass cos = new CosClass();
-        CotClass cot = new CotClass();
-        TanClass tan = new TanClass();
-        SecClass sec = new SecClass();
-        AnyLogarithm log3 = new AnyLogarithm(3);
-        AnyLogarithm log5 = new AnyLogarithm(5);
-        BaseELogarithm logE = new BaseELogarithm();
-        funcSystem = new FunctionalSystemClass(cos, cot, tan, sec, log3, log5, logE);
+        funcSystem = new FunctionalSystemClass();
     }
 
     // Parameterized test for successful cases
