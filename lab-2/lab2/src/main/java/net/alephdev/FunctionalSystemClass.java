@@ -5,13 +5,11 @@ import net.alephdev.logariphmic.BaseELogarithm;
 import net.alephdev.trigonometric.CosClass;
 import net.alephdev.trigonometric.CotClass;
 import net.alephdev.trigonometric.SecClass;
-import net.alephdev.trigonometric.SinClass;
 import net.alephdev.trigonometric.TanClass;
 
 public class FunctionalSystemClass {
 
     private CosClass cos = new CosClass();
-    private SinClass sin = new SinClass();
     private CotClass cot = new CotClass();
     private TanClass tan = new TanClass();
     private SecClass sec = new SecClass();
@@ -22,7 +20,6 @@ public class FunctionalSystemClass {
 
     public FunctionalSystemClass(){
         this.cos = new CosClass();
-        this.sin = new SinClass();
         this.cot = new CotClass();
         this.tan = new TanClass();
         this.sec = new SecClass();
