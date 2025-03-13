@@ -1,13 +1,13 @@
-package net.alephdev;
+package net.alephdev.function;
 
-import net.alephdev.logariphmic.AnyLogarithm;
-import net.alephdev.logariphmic.BaseELogarithm;
-import net.alephdev.trigonometric.CosClass;
-import net.alephdev.trigonometric.CotClass;
-import net.alephdev.trigonometric.SecClass;
-import net.alephdev.trigonometric.TanClass;
+import net.alephdev.function.logariphmic.AnyLogarithm;
+import net.alephdev.function.logariphmic.BaseELogarithm;
+import net.alephdev.function.trigonometric.CosClass;
+import net.alephdev.function.trigonometric.CotClass;
+import net.alephdev.function.trigonometric.SecClass;
+import net.alephdev.function.trigonometric.TanClass;
 
-public class FunctionalSystemClass {
+public class FunctionalSystemClass extends Function{
 
     private CosClass cos = new CosClass();
     private CotClass cot = new CotClass();
@@ -54,9 +54,10 @@ public class FunctionalSystemClass {
         return leftFinalTerm + rightFinalTerm;
     }
 
-    public double system(double x, int precision) {
-        return x <= 0 ?
-                negative(x, precision) :
-                positive(x, precision);
+    @Override
+    public double calculate(double arg, double precision) {
+        return arg <= 0 ?
+                negative(arg, precision) :
+                positive(arg, precision);
     }
 }

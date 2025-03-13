@@ -1,6 +1,6 @@
-package net.alephdev.logariphmic;
+package net.alephdev.function.logariphmic;
 
-import net.alephdev.IterableFunction;
+import net.alephdev.function.IterableFunction;
 
 public class AnyLogarithm extends IterableFunction{
 
