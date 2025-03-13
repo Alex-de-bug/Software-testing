@@ -47,54 +47,43 @@ public class FunctionalSystemClass extends IterableFunction{
         this.logE = logE;
     }
 
-    /**
-     * Проверка ОДЗ для x > 0.
-     * Функция не существует, если:
-     * 1. log3(x) = 0 (деление на ноль).
-     */
-    private void checkPositiveDomain(double x, double precision) {
-        if (Math.abs(log3.calculate(x, precision)) < EPSILON) {
-            throw new ArithmeticException("log3(x) = 0 при x = " + x);
-        }
-    }
-
-    /**
-     * Проверка ОДЗ для x <= 0.
-     * Функция не существует, если:
-     * cot(x) = 0 (деление на ноль).
-     */
-    private void checkNegativeDomain(double x, double precision) {
-        if (Math.abs(cot.calculate(x, precision)) < EPSILON) {
-            throw new ArithmeticException("cot(x) = 0 при x = " + x);
-        }
-    }
-
     private double negative(double x, double precision) {
 
-        checkNegativeDomain(x, precision);
+        double secX = sec.calculate(x, precision);
+        double cotX = cot.calculate(x, precision);
+        double cosX = cos.calculate(x, precision);
+        double tanX = tan.calculate(x, precision);
 
-        double leftUpperTerm = Math.pow(sec.calculate(x, precision) - cot.calculate(x, precision), 2);
-        double leftFirstTerm = leftUpperTerm / cot.calculate(x, precision);
-        double leftFinalTerm = Math.pow(leftFirstTerm - cos.calculate(x, precision), 3);
+        if(Math.abs(cotX) < EPSILON)
+            throw new ArithmeticException("Деление на 0.");
 
-        double rightFirstTerm = Math.pow(sec.calculate(x, precision), 2) - tan.calculate(x, precision);
-        double rightFinalTerm = rightFirstTerm * tan.calculate(x, precision);
+        double leftUpperTerm = Math.pow(secX - cotX, 2);
+        double leftFirstTerm = leftUpperTerm / cotX;
+        double leftFinalTerm = Math.pow(leftFirstTerm - cosX, 3);
+
+        double rightFirstTerm = Math.pow(secX, 2) - tanX;
+        double rightFinalTerm = rightFirstTerm * tanX;
 
         return leftFinalTerm + rightFinalTerm;
     }
  
     private double positive(double x, double precision) {
 
-        checkPositiveDomain(x, precision);
+        double logEx = logE.calculate(x, precision);
+        double log3x = log3.calculate(x, precision);
+        double log5x = log5.calculate(x, precision);
 
-        double leftUpperTerm1 = log3.calculate(x, precision) - logE.calculate(x, precision);
-        double leftUpperTermFinal = leftUpperTerm1 * logE.calculate(x, precision);
-        double leftFirstTerm = leftUpperTermFinal / log3.calculate(x, precision);
-        double leftSecondTerm = log3.calculate(x, precision) * log5.calculate(x, precision);
+        if(Math.abs(log3x) < EPSILON)
+            throw new ArithmeticException("Деление на 0.");
+
+        double leftUpperTerm1 = log3x - logEx;
+        double leftUpperTermFinal = leftUpperTerm1 * logEx;
+        double leftFirstTerm = leftUpperTermFinal / log3x;
+        double leftSecondTerm = log3x * log5x;
         double leftFinalTerm = leftFirstTerm - leftSecondTerm;
 
-        double rightSecondTerm = Math.pow(log5.calculate(x, precision), 3);
-        double rightFinalTerm = logE.calculate(x, precision) - rightSecondTerm;
+        double rightSecondTerm = Math.pow(log5x, 3);
+        double rightFinalTerm = logEx - rightSecondTerm;
 
         return leftFinalTerm + rightFinalTerm;
     }
