@@ -1,16 +1,39 @@
 package net.alephdev.logariphmic;
 
-import static net.alephdev.logariphmic.BaseELogarithm.*;
+import net.alephdev.IterableFunction;
 
-public class AnyLogarithm {
-    public static double logN(double x, double n, int iterations) {
-        if (x <= 0) {
-            throw new IllegalArgumentException("Логарифм определен только для положительных чисел");
-        }
-        if (n <= 0 || n == 1) {
-            throw new IllegalArgumentException("Основание должно быть положительным и не равным 1");
-        }
+public class AnyLogarithm extends IterableFunction{
 
-        return ln(x, iterations) / ln(n, iterations);
+    private final BaseELogarithm baseELogarithm;
+    private final int base;
+
+    public AnyLogarithm(final int base){
+        super();
+        this.baseELogarithm = new BaseELogarithm();
+        this.base = base;
     }
+
+    public AnyLogarithm(final int base, final BaseELogarithm baseELogarithm){
+        super();
+        this.baseELogarithm = baseELogarithm;
+        this.base = base;
+    }
+
+    @Override
+    public double calculate(double arg, double precision) {
+        if (arg <= 0) {
+            throw new ArithmeticException("Логарифм не определён для неположительных чисел: arg <= 0");
+        }
+
+        if (base <= 0 || base == 1) {
+            throw new ArithmeticException("Основание логарифма должно быть положительным и не равным 1: base <= 0 или base == 1");
+        }
+
+        double lnArg = baseELogarithm.calculate(arg, precision);
+
+        double lnBase = baseELogarithm.calculate(base, precision);
+
+        return lnArg / lnBase;
+    }
+    
 }

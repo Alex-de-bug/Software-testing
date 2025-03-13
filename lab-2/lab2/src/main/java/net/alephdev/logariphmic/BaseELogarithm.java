@@ -1,40 +1,33 @@
 package net.alephdev.logariphmic;
 
-public class BaseELogarithm {
-    public static double ln(double x, int iterations) {
-        if (x <= 0) {
-            throw new IllegalArgumentException("Логарифм определен только для положительных чисел");
-        }
+import net.alephdev.IterableFunction;
 
-        double z = x - 1;
+public class BaseELogarithm extends IterableFunction {
 
-        if (x > 2 || x < 0.5) {
-            int k = 0;
-            while (x > 2) {
-                x /= Math.E;
-                k++;
-            }
-            while (x < 0.5) {
-                x *= Math.E;
-                k--;
-            }
-            z = x - 1;
-
-            return k + lnTaylor(z, iterations);
-        }
-
-        return lnTaylor(z, iterations);
+    public BaseELogarithm() {
+        super();
     }
 
-    private static double lnTaylor(double z, int iterations) {
-        double result = 0;
-        double term = z;
+    @Override
+    public double calculate(double arg, double precision) {
+        if (arg <= 0) {
+            throw new ArithmeticException("Натуральный логарифм не определён для неположительных чисел: arg <= 0");
+        }
 
-        for (int n = 1; n <= iterations; n++) {
+        double x = (arg - 1) / (arg + 1);
+        double result = 0.0;
+        double term = x;
+        double xSquared = x * x;
+        int n = 1;
+
+        while (Math.abs(term) >= precision) {
             result += term / n;
-            term = -term * z;
+            term *= xSquared;
+            n += 2;
         }
 
-        return result;
+        return 2 * result;
     }
+
 }
+

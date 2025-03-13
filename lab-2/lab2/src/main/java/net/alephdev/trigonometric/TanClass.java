@@ -1,12 +1,37 @@
 package net.alephdev.trigonometric;
 
-import static net.alephdev.trigonometric.CosClass.cos;
-import static net.alephdev.trigonometric.SinClass.sin;
+import net.alephdev.IterableFunction;
 
-public class TanClass {
+public class TanClass extends IterableFunction {
 
-    public static double tan(double x, int iterations) {
-        return sin(x, iterations) / cos(x, iterations);
+    private final SinClass sin;
+    private final CosClass cos;
+
+    public TanClass() {
+        this.sin = new SinClass();
+        this.cos = new CosClass();
     }
 
+    public TanClass(final SinClass sin, final CosClass cos) {
+        this.sin = sin;
+        this.cos = cos;
+    }
+
+    @Override
+    public double calculate(double arg, double precision) {
+        double normalizedArg = arg % Math.PI;
+
+        if (Math.abs(normalizedArg - Math.PI / 2) < EPSILON) {
+            throw new ArithmeticException("Тангенс не определён для данного аргумента");
+        }
+
+        double sinValue = sin.calculate(arg, precision);
+        double cosValue = cos.calculate(arg, precision);
+
+        if (Math.abs(cosValue) < EPSILON) {
+            throw new ArithmeticException("Тангенс не определён для данного аргумента");
+        }
+
+        return sinValue / cosValue;
+    }
 }

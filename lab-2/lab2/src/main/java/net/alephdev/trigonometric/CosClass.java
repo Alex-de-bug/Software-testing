@@ -1,32 +1,27 @@
 package net.alephdev.trigonometric;
 
-public class CosClass extends TrigonometricFunc{
+import net.alephdev.IterableFunction;
 
-    public CosClass(double arg){
-        super(arg);
-    }
-    public CosClass(double arg, int iter){
-        super(arg, iter);
+public class CosClass extends IterableFunction {
+
+    public CosClass() {
+        super();
     }
 
     @Override
-    public double calculate() {
-        arg = arg % (2 * Math.PI);
+    public double calculate(final double arg, final double precision) {
+        double result = 1.0; // Начальное значение результата (первый член ряда)
+        double term = 1.0;   // Текущий член ряда
+        double x = arg;      // Аргумент косинуса
+        int n = 1;           // Счётчик для итераций
 
-        if (arg > Math.PI) {
-            arg -= 2 * Math.PI;
-        }
-        if (arg < -Math.PI) {
-            arg += 2 * Math.PI;
-        }
+        // Приводим аргумент к диапазону [0, 2*PI] для улучшения точности
+        x = x % (2 * Math.PI);
 
-        double result = 1.0;
-        double term = 1.0;
-        double xSquared = arg * arg;
-
-        for (int i = 1; i <= iter; i++) {
-            term = -term * xSquared / ((2 * i - 1) * (2 * i));
-            result += term;
+        while (Math.abs(term) >= precision) {
+            term *= -x * x / ((2 * n - 1) * (2 * n)); // Вычисляем следующий член ряда
+            result += term; // Добавляем его к результату
+            n++; // Увеличиваем счётчик
         }
 
         return result;

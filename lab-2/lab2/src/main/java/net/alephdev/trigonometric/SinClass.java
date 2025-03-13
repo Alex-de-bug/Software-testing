@@ -1,11 +1,24 @@
 package net.alephdev.trigonometric;
 
-import static net.alephdev.trigonometric.CosClass.cos;
+import net.alephdev.IterableFunction;
 
-public class SinClass {
+public class SinClass extends IterableFunction {
 
-    public static double sin(double x, int iterations) {
-        return cos(x + Math.PI / 2, iterations);
+    private final CosClass cos;
+
+    public SinClass() {
+        super();
+        this.cos = new CosClass();
+    }
+
+    public SinClass(final CosClass cos) {
+        super();
+        this.cos = cos;
+    }
+
+    @Override
+    public double calculate(double arg, double precision) {
+        return cos.calculate(arg + Math.PI / 2, precision);
     }
 
 }
