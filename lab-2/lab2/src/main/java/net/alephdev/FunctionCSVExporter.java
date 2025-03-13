@@ -11,6 +11,7 @@ import net.alephdev.function.IterableFunction;
 import net.alephdev.function.logariphmic.AnyLogarithm;
 import net.alephdev.function.logariphmic.BaseELogarithm;
 import net.alephdev.function.trigonometric.CosClass;
+import net.alephdev.function.trigonometric.CotClass;
 import net.alephdev.function.trigonometric.SecClass;
 import net.alephdev.function.trigonometric.SinClass;
 import net.alephdev.function.trigonometric.TanClass;
@@ -50,6 +51,7 @@ public class FunctionCSVExporter {
         CosClass cos = new CosClass();
         TanClass tan = new TanClass();
         SecClass sec = new SecClass();
+        CotClass cot = new CotClass();
         BaseELogarithm ln = new BaseELogarithm();
         AnyLogarithm log2 = new AnyLogarithm(2);
         FunctionalSystemClass func = new FunctionalSystemClass();
@@ -58,6 +60,7 @@ public class FunctionCSVExporter {
         exportToCSV(cos, 0, 2 * Math.PI, 0.1, "results/cos_results.csv");
         exportToCSV(tan, 0, 2 * Math.PI, 0.1, "results/tan_results.csv");
         exportToCSV(sec, 0, 2 * Math.PI, 0.1, "results/sec_results.csv");
+        exportToCSV(cot, 0, 2 * Math.PI, 0.1, "results/cot_results.csv");
         exportToCSV(ln, 0.1, 10, 0.1, "results/ln_results.csv");
         exportToCSV(log2, 0.1, 10, 0.1, "results/log2_results.csv");
         exportToCSV(func, -1, 10, 0.01, "results/func_system.csv");
