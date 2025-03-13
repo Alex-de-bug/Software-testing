@@ -13,6 +13,7 @@ public class CosClass extends IterableFunction {
 
         // Приводим аргумент к диапазону [0, 2*PI] для улучшения точности
         x = x % (2 * Math.PI);
+        if (x < 0) x += 2 * Math.PI;
 
         while (Math.abs(term) >= precision) {
             term *= -x * x / ((2 * n - 1) * (2 * n)); // Вычисляем следующий член ряда
