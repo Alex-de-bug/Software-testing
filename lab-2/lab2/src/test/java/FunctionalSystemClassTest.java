@@ -80,10 +80,12 @@ class FunctionalSystemClassTest {
     // Parameterized test for error cases (ArithmeticException)
     @ParameterizedTest(name = "Test error case x={0}")
     @ValueSource(doubles = {
-        -Math.PI / 2,    // cot(x) = 0 (undefined in negative domain)
+        -Math.PI / 2,    // cot(x) = 0
         0.0,             // Boundary case
-        1.0,             // log3(x) = 0 (undefined in positive domain)
-        -Math.PI         // cot(x) = 0 (undefined in negative domain)
+        1.0,             // log3(x) = 0
+        -Math.PI         // cot(x) = 0 
+        -2 * Math.PI,    // cot(-2π) = 0
+        -Math.PI - 1e-11 // cot(-π - ε) ≈ 0 (close to zero)
     })
     void testErrorCases(double input) {
         assertThrows(ArithmeticException.class, 

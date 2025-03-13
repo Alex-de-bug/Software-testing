@@ -54,9 +54,6 @@ public class FunctionalSystemClass extends IterableFunction{
         double cosX = cos.calculate(x, precision);
         double tanX = tan.calculate(x, precision);
 
-        if(Math.abs(cotX) < EPSILON)
-            throw new ArithmeticException("Деление на 0.");
-
         double leftUpperTerm = Math.pow(secX - cotX, 2);
         double leftFirstTerm = leftUpperTerm / cotX;
         double leftFinalTerm = Math.pow(leftFirstTerm - cosX, 3);

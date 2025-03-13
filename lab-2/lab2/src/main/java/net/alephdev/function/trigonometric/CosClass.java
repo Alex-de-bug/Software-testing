@@ -19,7 +19,7 @@ public class CosClass extends IterableFunction {
             term *= -x * x / ((2 * n - 1) * (2 * n)); // Вычисляем следующий член ряда
             result += term; // Добавляем его к результату
             n++; // Увеличиваем счётчик
-            if(n > 100000) break;
+            if(n > 10000) break;
         }
 
         return result;

@@ -20,7 +20,7 @@ public class TanClass extends IterableFunction {
     @Override
     public double calculate(double arg, double precision) {
         double normalizedArg = arg % Math.PI;
-        if (Math.abs(normalizedArg) < 0) normalizedArg += Math.PI;
+        // if (Math.abs(normalizedArg) < 0) normalizedArg += Math.PI;
 
         if (Math.abs(normalizedArg - Math.PI / 2) < EPSILON) {
             throw new ArithmeticException("Тангенс не определён для данного аргумента");

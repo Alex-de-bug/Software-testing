@@ -16,7 +16,6 @@ class CosClassTest{
         cosClass = new CosClass();
     }
 
-    // Parameterized test for successful cases
     @ParameterizedTest(name = "Test x={0}, expected={1}")
     @ValueSource(doubles = {
         0,
@@ -27,9 +26,65 @@ class CosClassTest{
         6*Math.PI,
         -6*Math.PI
     })
-    void testSuccessfulCases(double input) {
+    void testSuccessfulCasesMaxY(double input) {
         double result = cosClass.calculate(input, DELTA);
         assertEquals(1.0f, result, DELTA_TEST, 
+            "Failed for input x=" + input);
+    }
+
+    @ParameterizedTest(name = "Test x={0}, expected={1}")
+    @ValueSource(doubles = {
+        Math.PI/2,
+        -Math.PI/2,
+        3*Math.PI/2,
+        -3*Math.PI/2,
+        5*Math.PI/2,
+        -5*Math.PI/2
+    })
+    void testSuccessfulCasesAvgY(double input) {
+        double result = cosClass.calculate(input, DELTA);
+        assertEquals(0.0f, result, DELTA_TEST, 
+            "Failed for input x=" + input);
+    }
+
+    @ParameterizedTest(name = "Test x={0}, expected={1}")
+    @ValueSource(doubles = {
+        Math.PI,
+        -Math.PI,
+        3*Math.PI,
+        -3*Math.PI,
+        5*Math.PI,
+        -5*Math.PI
+    })
+    void testSuccessfulCasesMinY(double input) {
+        double result = cosClass.calculate(input, DELTA);
+        assertEquals(-1.0f, result, DELTA_TEST, 
+            "Failed for input x=" + input);
+    }
+
+    @ParameterizedTest(name = "Test x={0}, expected={1}")
+    @ValueSource(doubles = {
+        Math.PI/4,
+        -Math.PI/4,
+        7*Math.PI/4,
+        -7*Math.PI/4
+    })
+    void testSuccessfulCasesQuater(double input) {
+        double result = cosClass.calculate(input, DELTA);
+        assertEquals(0.7071067811865475f, result, DELTA_TEST, 
+            "Failed for input x=" + input);
+    }
+
+    @ParameterizedTest(name = "Test x={0}, expected={1}")
+    @ValueSource(doubles = {
+        3*Math.PI/4,
+        -3*Math.PI/4,
+        5*Math.PI/4,
+        -5*Math.PI/4
+    })
+    void testSuccessfulCasesMinusQuater(double input) {
+        double result = cosClass.calculate(input, DELTA);
+        assertEquals(-0.7071067811865475f, result, DELTA_TEST, 
             "Failed for input x=" + input);
     }
     
