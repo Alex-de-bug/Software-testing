@@ -22,7 +22,7 @@ public class BaseELogarithm extends IterableFunction {
             term *= xSquared;
             n += 2;
             counter++;
-            if(counter > 1000) break;
+            if(counter > 100000) break;
         }
          
         return 2 * result;

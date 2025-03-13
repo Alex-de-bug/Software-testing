@@ -19,14 +19,12 @@ public class CotClass extends IterableFunction {
 
     @Override
     public double calculate(double arg, double precision) {
-        double normalizedArg = arg % Math.PI;
+        double x = arg % (2 * Math.PI);
 
-        if (Math.abs(normalizedArg - Math.PI / 2) < EPSILON) {
-            throw new ArithmeticException("Тангенс не определён для данного аргумента");
-        }
+        if (Math.abs(x) < EPSILON) x += 2 * Math.PI;
 
-        double sinValue = sin.calculate(arg, precision);
-        double cosValue = cos.calculate(arg, precision);
+        double sinValue = sin.calculate(x, precision);
+        double cosValue = cos.calculate(x, precision);
 
         if (Math.abs(sinValue) < EPSILON) {
             throw new ArithmeticException("Тангенс не определён для данного аргумента");

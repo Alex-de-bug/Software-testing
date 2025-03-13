@@ -16,7 +16,7 @@ public class SinClass extends IterableFunction {
 
     @Override
     public double calculate(double arg, double precision) {
-        return cos.calculate(arg + Math.PI / 2, precision);
+        return cos.calculate(Math.PI / 2 - arg, precision);
     }
 
 }

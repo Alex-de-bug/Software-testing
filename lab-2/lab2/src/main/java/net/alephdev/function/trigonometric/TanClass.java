@@ -20,18 +20,19 @@ public class TanClass extends IterableFunction {
     @Override
     public double calculate(double arg, double precision) {
         double normalizedArg = arg % Math.PI;
+        if (Math.abs(normalizedArg) < 0) normalizedArg += Math.PI;
 
         if (Math.abs(normalizedArg - Math.PI / 2) < EPSILON) {
             throw new ArithmeticException("Тангенс не определён для данного аргумента");
         }
 
-        double cosValue = cos.calculate(arg, precision);
+        double cosValue = cos.calculate(normalizedArg, precision);
 
         if (Math.abs(cosValue) < EPSILON) {
             throw new ArithmeticException("Тангенс не определён для данного аргумента");
         }
 
-        double sinValue = sin.calculate(arg, precision);
+        double sinValue = sin.calculate(normalizedArg, precision);
 
         return sinValue / cosValue;
     }

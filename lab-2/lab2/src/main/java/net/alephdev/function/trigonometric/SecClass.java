@@ -16,13 +16,13 @@ public class SecClass extends IterableFunction {
 
     @Override
     public double calculate(double arg, double precision) {
-        double normalizedArg = arg % Math.PI;
+        double x = arg % (2 * Math.PI);
 
-        if (Math.abs(normalizedArg - Math.PI / 2) < EPSILON) {
-            throw new ArithmeticException("Секанс не определён для данного аргумента");
+        if (Math.abs(x) < EPSILON) {
+            x += 2 * Math.PI;
         }
 
-        double cosValue = cos.calculate(arg, precision);
+        double cosValue = cos.calculate(x, precision);
 
         if (Math.abs(cosValue) < EPSILON) {
             throw new ArithmeticException("Секанс не определён для данного аргумента");
