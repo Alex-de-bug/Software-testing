@@ -58,7 +58,7 @@ public class FunctionalSystemClass extends IterableFunction{
         }
     }
 
-        /**
+    /**
      * Проверка ОДЗ для x <= 0.
      * Функция не существует, если:
      * cot(x) = 0 (деление на ноль).
