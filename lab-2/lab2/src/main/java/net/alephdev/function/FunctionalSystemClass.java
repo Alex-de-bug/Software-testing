@@ -90,7 +90,7 @@ public class FunctionalSystemClass extends IterableFunction{
         double leftUpperTerm1 = log3.calculate(x, precision) - logE.calculate(x, precision);
         double leftUpperTermFinal = leftUpperTerm1 * logE.calculate(x, precision);
         double leftFirstTerm = leftUpperTermFinal / log3.calculate(x, precision);
-        double leftSecondTerm = logE.calculate(x, precision) * log5.calculate(x, precision);
+        double leftSecondTerm = log3.calculate(x, precision) * log5.calculate(x, precision);
         double leftFinalTerm = leftFirstTerm - leftSecondTerm;
 
         double rightSecondTerm = Math.pow(log5.calculate(x, precision), 3);

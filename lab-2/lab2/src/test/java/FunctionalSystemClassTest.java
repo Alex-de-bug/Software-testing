@@ -84,8 +84,8 @@ public class FunctionalSystemClassTest {
 
     @Test()
     public void testCloseToZero() {
-        double expected = -2.1655;
-        double result = funcSystem.calculate(0.11, DELTA);
+        double expected = -2.168387;
+        double result = funcSystem.calculate(0.116076, DELTA);
         assertEquals(expected, result, DELTA_TEST);
     }
 }
