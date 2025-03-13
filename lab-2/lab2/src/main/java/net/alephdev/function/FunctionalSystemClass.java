@@ -29,7 +29,31 @@ public class FunctionalSystemClass extends IterableFunction{
         this.logE = new BaseELogarithm();
     }
 
+    /**
+     * Проверка ОДЗ для x > 0.
+     * Функция не существует, если:
+     * 1. log3(x) = 0 (деление на ноль).
+     */
+    private void checkPositiveDomain(double x, double precision) {
+        if (Math.abs(log3.calculate(x, precision)) < precision) {
+            throw new ArithmeticException("log3(x) = 0 при x = " + x);
+        }
+    }
+
+        /**
+     * Проверка ОДЗ для x <= 0.
+     * Функция не существует, если:
+     * cot(x) = 0 (деление на ноль).
+     */
+    private void checkNegativeDomain(double x, double precision) {
+        if (Math.abs(cot.calculate(x, precision)) < precision) {
+            throw new ArithmeticException("cot(x) = 0 при x = " + x);
+        }
+    }
+
     private double negative(double x, double precision) {
+
+        checkNegativeDomain(x, precision);
 
         double leftUpperTerm = Math.pow(sec.calculate(x, precision) - cot.calculate(x, precision), 2);
         double leftFirstTerm = leftUpperTerm / cot.calculate(x, precision);
@@ -42,6 +66,9 @@ public class FunctionalSystemClass extends IterableFunction{
     }
  
     private double positive(double x, double precision) {
+
+        checkPositiveDomain(x, precision);
+
         double leftUpperTerm1 = log3.calculate(x, precision) - logE.calculate(x, precision);
         double leftUpperTermFinal = leftUpperTerm1 * logE.calculate(x, precision);
         double leftFirstTerm = leftUpperTermFinal / log3.calculate(x, precision);

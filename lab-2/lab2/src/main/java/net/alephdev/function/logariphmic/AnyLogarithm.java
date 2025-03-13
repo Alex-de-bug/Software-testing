@@ -20,7 +20,7 @@ public class AnyLogarithm extends IterableFunction{
 
     @Override
     public double calculate(double arg, double precision) {
-        if (arg <= 0) {
+        if (Math.abs(arg) <= EPSILON) {
             throw new ArithmeticException("Логарифм не определён для неположительных чисел: arg <= 0");
         }
 

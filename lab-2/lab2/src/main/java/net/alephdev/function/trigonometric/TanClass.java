@@ -25,12 +25,13 @@ public class TanClass extends IterableFunction {
             throw new ArithmeticException("Тангенс не определён для данного аргумента");
         }
 
-        double sinValue = sin.calculate(arg, precision);
         double cosValue = cos.calculate(arg, precision);
 
         if (Math.abs(cosValue) < EPSILON) {
             throw new ArithmeticException("Тангенс не определён для данного аргумента");
         }
+
+        double sinValue = sin.calculate(arg, precision);
 
         return sinValue / cosValue;
     }

@@ -2,6 +2,9 @@ package net.alephdev;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 import net.alephdev.function.FunctionalSystemClass;
 import net.alephdev.function.IterableFunction;
@@ -21,15 +24,19 @@ public class FunctionCSVExporter {
             double step,              
             String filename           
     ) {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
+        symbols.setMinusSign('-');
+        DecimalFormat df = new DecimalFormat("0." + "0".repeat(4), symbols);
+
         try (FileWriter writer = new FileWriter(filename)) {
             writer.write("X,Результаты модуля (X)\n");
 
             for (double x = start; x <= end; x += step) {
                 try {
-                    double result = function.calculate(x, 1e-10); 
-                    writer.write(x + "," + result + "\n");       
+                    double result = function.calculate(Double.parseDouble(df.format(x)), 1e-10); 
+                    writer.write(df.format(x) + "," + df.format(result) + "\n");       
                 } catch (ArithmeticException e) {
-                    writer.write(x + ",undefined\n");
+                    writer.write(df.format(x) + ",undefined\n");
                 }
             }
         } catch (IOException e) {
