@@ -3,8 +3,8 @@ package net.alephdev;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import net.alephdev.function.Function;
 import net.alephdev.function.FunctionalSystemClass;
+import net.alephdev.function.IterableFunction;
 import net.alephdev.function.logariphmic.AnyLogarithm;
 import net.alephdev.function.logariphmic.BaseELogarithm;
 import net.alephdev.function.trigonometric.CosClass;
@@ -15,7 +15,7 @@ import net.alephdev.function.trigonometric.TanClass;
 public class FunctionCSVExporter {
 
     public static void exportToCSV(
-            Function function, 
+            IterableFunction function, 
             double start,             
             double end,               
             double step,              

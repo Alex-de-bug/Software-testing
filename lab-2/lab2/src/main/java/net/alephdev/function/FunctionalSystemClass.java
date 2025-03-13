@@ -7,7 +7,7 @@ import net.alephdev.function.trigonometric.CotClass;
 import net.alephdev.function.trigonometric.SecClass;
 import net.alephdev.function.trigonometric.TanClass;
 
-public class FunctionalSystemClass extends Function{
+public class FunctionalSystemClass extends IterableFunction{
 
     private CosClass cos = new CosClass();
     private CotClass cot = new CotClass();

@@ -29,10 +29,8 @@ public class AnyLogarithm extends IterableFunction{
         }
 
         double lnArg = baseELogarithm.calculate(arg, precision);
-
         double lnBase = baseELogarithm.calculate(base, precision);
 
         return lnArg / lnBase;
     }
-    
 }
