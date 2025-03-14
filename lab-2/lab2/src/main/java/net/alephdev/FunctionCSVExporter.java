@@ -63,6 +63,6 @@ public class FunctionCSVExporter {
         exportToCSV(cot, 0, 2 * Math.PI, 0.1, "results/cot_results.csv");
         exportToCSV(ln, 0.1, 10, 0.1, "results/ln_results.csv");
         exportToCSV(log2, 0.1, 10, 0.1, "results/log2_results.csv");
-        exportToCSV(func, -1, 10, 0.01, "results/func_system.csv");
+        exportToCSV(func, -6, 10, 0.01, "results/func_system.csv");
     }
 }
