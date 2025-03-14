@@ -48,9 +48,14 @@ public class FunctionCSVExporter {
 
     public static void main(String[] args) {
 
-        String delimiter = ",";
-        if(args.length > 0)
-            delimiter = args[0];
+        if(args.length < 1) {
+            System.err.println("Использование: lab2 [all/sin/cos/tan/sec/cot/ln/log2/func] (delimiter)");
+            return;
+        }
+
+
+        String mode = args[0].toLowerCase();
+        String delimiter = args.length > 1 ? args[1] : ",";
 
         SinClass sin = new SinClass();
         CosClass cos = new CosClass();
@@ -61,13 +66,45 @@ public class FunctionCSVExporter {
         AnyLogarithm log2 = new AnyLogarithm(2);
         FunctionalSystemClass func = new FunctionalSystemClass();
 
-        exportToCSV(sin, 0, 2 * Math.PI, 0.1, "results/sin_results.csv", delimiter);
-        exportToCSV(cos, 0, 2 * Math.PI, 0.1, "results/cos_results.csv", delimiter);
-        exportToCSV(tan, 0, 2 * Math.PI, 0.1, "results/tan_results.csv", delimiter);
-        exportToCSV(sec, 0, 2 * Math.PI, 0.1, "results/sec_results.csv", delimiter);
-        exportToCSV(cot, 0, 2 * Math.PI, 0.1, "results/cot_results.csv", delimiter);
-        exportToCSV(ln, 0.1, 10, 0.1, "results/ln_results.csv", delimiter);
-        exportToCSV(log2, 0.1, 10, 0.1, "results/log2_results.csv", delimiter);
-        exportToCSV(func, -6, 10, 0.01, "results/func_system.csv", delimiter);
+        switch (mode) {
+            case "all":
+                exportToCSV(sin, 0, 2 * Math.PI, 0.1, "results/sin_results.csv", delimiter);
+                exportToCSV(cos, 0, 2 * Math.PI, 0.1, "results/cos_results.csv", delimiter);
+                exportToCSV(tan, 0, 2 * Math.PI, 0.1, "results/tan_results.csv", delimiter);
+                exportToCSV(sec, 0, 2 * Math.PI, 0.1, "results/sec_results.csv", delimiter);
+                exportToCSV(cot, 0, 2 * Math.PI, 0.1, "results/cot_results.csv", delimiter);
+                exportToCSV(ln, 0.1, 10, 0.1, "results/ln_results.csv", delimiter);
+                exportToCSV(log2, 0.1, 10, 0.1, "results/log2_results.csv", delimiter);
+                exportToCSV(func, -6, 10, 0.01, "results/func_system.csv", delimiter);
+                break;
+            case "sin":
+                exportToCSV(sin, 0, 2 * Math.PI, 0.1, "results/sin_results.csv", delimiter);
+                break;
+            case "cos":
+                exportToCSV(cos, 0, 2 * Math.PI, 0.1, "results/cos_results.csv", delimiter);
+                break;
+            case "tan":
+                exportToCSV(tan, 0, 2 * Math.PI, 0.1, "results/tan_results.csv", delimiter);
+                break;
+            case "sec":
+                exportToCSV(sec, 0, 2 * Math.PI, 0.1, "results/sec_results.csv", delimiter);
+                break;
+            case "cot":
+                exportToCSV(cot, 0, 2 * Math.PI, 0.1, "results/cot_results.csv", delimiter);
+                break;
+            case "ln":
+                exportToCSV(ln, 0.1, 10, 0.1, "results/ln_results.csv", delimiter);
+                break;
+            case "log2":
+                exportToCSV(log2, 0.1, 10, 0.1, "results/log2_results.csv", delimiter);
+                break;
+            case "func":
+                exportToCSV(func, -6, 10, 0.01, "results/func_system.csv", delimiter);
+                break;
+            default:
+                System.err.println("Неизвестный режим: " + mode);
+                System.err.println("Доступные режимы: all, sin, cos, tan, sec, cot, ln, log2, func");
+                break;
+        }
     }
 }
