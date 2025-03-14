@@ -29,24 +29,6 @@ public class FunctionalSystemClass extends IterableFunction{
         this.logE = new BaseELogarithm();
     }
 
-    public FunctionalSystemClass(
-            final CosClass cos,
-            final CotClass cot,
-            final TanClass tan,
-            final SecClass sec,
-            final AnyLogarithm log3,
-            final AnyLogarithm log5,
-            final BaseELogarithm logE
-    ){
-        this.cos = cos;
-        this.cot = cot;
-        this.tan = tan;
-        this.sec = sec;
-        this.log3 = log3;
-        this.log5 = log5;
-        this.logE = logE;
-    }
-
     private double negative(double x, double precision) {
 
         double secX = sec.calculate(x, precision);
