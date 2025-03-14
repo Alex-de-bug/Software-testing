@@ -88,5 +88,18 @@ class CosClassTest{
         assertEquals(-0.7071067811865475f, result, DELTA_TEST, 
             "Failed for input x=" + input);
     }
+
+    @ParameterizedTest(name = "Test x={0}, expected={1}")
+    @ValueSource(doubles = {
+        3*Math.PI/4,
+        -3*Math.PI/4,
+        5*Math.PI/4,
+        -5*Math.PI/4
+    })
+    void testSuccessfulCasesMinusQuater(double input) {
+        double result = cosClass.calculate(input, DELTA);
+        assertEquals(-0.7071067811865475f, result, DELTA_TEST, 
+            "Failed for input x=" + input);
+    }
     
 }

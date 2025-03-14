@@ -23,21 +23,22 @@ public class FunctionCSVExporter {
             double start,             
             double end,               
             double step,              
-            String filename           
+            String filename,
+            String spliter      
     ) {
         DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
         symbols.setMinusSign('-');
         DecimalFormat df = new DecimalFormat("0." + "0".repeat(4), symbols);
 
         try (FileWriter writer = new FileWriter(filename)) {
-            writer.write("X,Результаты модуля (X)\n");
+            writer.write("X"+spliter+"Результаты модуля (X)\n");
 
             for (double x = start; x <= end; x += step) {
                 try {
                     double result = function.calculate(Double.parseDouble(df.format(x)), 1e-10); 
-                    writer.write(df.format(x) + "," + df.format(result) + "\n");       
+                    writer.write(df.format(x) + spliter + df.format(result) + "\n");       
                 } catch (ArithmeticException e) {
-                    writer.write(df.format(x) + ",undefined\n");
+                    writer.write(df.format(x) + spliter + "undefined\n");
                 }
             }
         } catch (IOException e) {
@@ -56,13 +57,13 @@ public class FunctionCSVExporter {
         AnyLogarithm log2 = new AnyLogarithm(2);
         FunctionalSystemClass func = new FunctionalSystemClass();
 
-        exportToCSV(sin, 0, 2 * Math.PI, 0.1, "results/sin_results.csv");
-        exportToCSV(cos, 0, 2 * Math.PI, 0.1, "results/cos_results.csv");
-        exportToCSV(tan, 0, 2 * Math.PI, 0.1, "results/tan_results.csv");
-        exportToCSV(sec, 0, 2 * Math.PI, 0.1, "results/sec_results.csv");
-        exportToCSV(cot, 0, 2 * Math.PI, 0.1, "results/cot_results.csv");
-        exportToCSV(ln, 0.1, 10, 0.1, "results/ln_results.csv");
-        exportToCSV(log2, 0.1, 10, 0.1, "results/log2_results.csv");
-        exportToCSV(func, -6, 10, 0.01, "results/func_system.csv");
+        exportToCSV(sin, 0, 2 * Math.PI, 0.1, "results/sin_results.csv", ";");
+        exportToCSV(cos, 0, 2 * Math.PI, 0.1, "results/cos_results.csv", ".|.");
+        exportToCSV(tan, 0, 2 * Math.PI, 0.1, "results/tan_results.csv", "'|'");
+        exportToCSV(sec, 0, 2 * Math.PI, 0.1, "results/sec_results.csv", "||||||");
+        exportToCSV(cot, 0, 2 * Math.PI, 0.1, "results/cot_results.csv", "+-+");
+        exportToCSV(ln, 0.1, 10, 0.1, "results/ln_results.csv", ":-:");
+        exportToCSV(log2, 0.1, 10, 0.1, "results/log2_results.csv", "*_*");
+        exportToCSV(func, -6, 10, 0.01, "results/func_system.csv", "$..$");
     }
 }
