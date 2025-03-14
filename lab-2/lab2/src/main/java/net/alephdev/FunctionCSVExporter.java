@@ -19,16 +19,6 @@ import net.alephdev.function.trigonometric.TanClass;
 public class FunctionCSVExporter {
 
     public static void exportToCSV(
-            IterableFunction function,
-            double start,
-            double end,
-            double step,
-            String filename
-    ) {
-        exportToCSV(function, start, end, step, filename, ",");
-    }
-
-    public static void exportToCSV(
             IterableFunction function, 
             double start,             
             double end,               
@@ -58,6 +48,10 @@ public class FunctionCSVExporter {
 
     public static void main(String[] args) {
 
+        String delimiter = ",";
+        if(args.length > 0)
+            delimiter = args[0];
+
         SinClass sin = new SinClass();
         CosClass cos = new CosClass();
         TanClass tan = new TanClass();
@@ -67,13 +61,13 @@ public class FunctionCSVExporter {
         AnyLogarithm log2 = new AnyLogarithm(2);
         FunctionalSystemClass func = new FunctionalSystemClass();
 
-        exportToCSV(sin, 0, 2 * Math.PI, 0.1, "results/sin_results.csv");
-        exportToCSV(cos, 0, 2 * Math.PI, 0.1, "results/cos_results.csv");
-        exportToCSV(tan, 0, 2 * Math.PI, 0.1, "results/tan_results.csv");
-        exportToCSV(sec, 0, 2 * Math.PI, 0.1, "results/sec_results.csv");
-        exportToCSV(cot, 0, 2 * Math.PI, 0.1, "results/cot_results.csv");
-        exportToCSV(ln, 0.1, 10, 0.1, "results/ln_results.csv");
-        exportToCSV(log2, 0.1, 10, 0.1, "results/log2_results.csv");
-        exportToCSV(func, -6, 10, 0.01, "results/func_system.csv");
+        exportToCSV(sin, 0, 2 * Math.PI, 0.1, "results/sin_results.csv", delimiter);
+        exportToCSV(cos, 0, 2 * Math.PI, 0.1, "results/cos_results.csv", delimiter);
+        exportToCSV(tan, 0, 2 * Math.PI, 0.1, "results/tan_results.csv", delimiter);
+        exportToCSV(sec, 0, 2 * Math.PI, 0.1, "results/sec_results.csv", delimiter);
+        exportToCSV(cot, 0, 2 * Math.PI, 0.1, "results/cot_results.csv", delimiter);
+        exportToCSV(ln, 0.1, 10, 0.1, "results/ln_results.csv", delimiter);
+        exportToCSV(log2, 0.1, 10, 0.1, "results/log2_results.csv", delimiter);
+        exportToCSV(func, -6, 10, 0.01, "results/func_system.csv", delimiter);
     }
 }
