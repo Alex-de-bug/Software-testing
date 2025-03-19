@@ -2,13 +2,16 @@ package trigonometric;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
+
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.MockingDetails;
 import org.mockito.Mockito;
-import static org.mockito.Mockito.when;
 
 import net.alephdev.function.trigonometric.CosClass;
 import net.alephdev.function.trigonometric.SinClass;
@@ -61,6 +64,10 @@ class SinClassTest {
         double result = mockSinClass.calculate(input, DELTA);
         assertEquals(expected, result, DELTA_TEST,
             "Failed for mocked input x=" + input);
+
+        verify(mockCosClass, times(1)).calculate(mockInput, DELTA);
+
+        inOrder()
     }
 
     private static Stream<Arguments> provideSinMockTestData() {
