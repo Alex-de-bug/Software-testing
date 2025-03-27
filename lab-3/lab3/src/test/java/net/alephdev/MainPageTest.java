@@ -31,30 +31,22 @@ public class MainPageTest {
     }
     @Test
     public void testProfileClick() throws InterruptedException {
-        WebElement profileButton = MainPage.getProfileButton(driver);
-        assert profileButton.isDisplayed() : "Кнопка профиля не отображается на странице";
-        profileButton.click();
+        Utils.clickAndWait(MainPage.getProfileButton(driver), "Кнопка профиля");
         Utils.assertPage(driver, "profile");
     }
     @Test
     public void testEventsClick() throws InterruptedException {
-        WebElement eventsButton = MainPage.getEventsButton(driver);
-        assert eventsButton.isDisplayed() : "Кнопка событий не отображается на странице";
-        eventsButton.click();
+        Utils.clickAndWait(MainPage.getEventsButton(driver), "Кнопка событий");
         Utils.assertPage(driver, "event-list");
     }
     @Test
     public void testRatingClick() throws InterruptedException {
-        WebElement ratingButton = MainPage.getRatingButton(driver);
-        assert ratingButton.isDisplayed() : "Кнопка рейтинга не отображается на странице";
-        ratingButton.click();
+        Utils.clickAndWait(MainPage.getRatingButton(driver), "Кнопка рейтинга");
         Utils.assertPage(driver, "rating");
     }
     @Test
     public void testSearchClick() throws InterruptedException {
-        WebElement searchButton = MainPage.getSearchButton(driver);
-        assert searchButton.isDisplayed() : "Кнопка поиска не отображается на странице";
-        searchButton.click();
+        Utils.clickAndWait(MainPage.getSearchButton(driver), "Кнопка поиска");
         Utils.assertPage(driver, "search");
     }
 }

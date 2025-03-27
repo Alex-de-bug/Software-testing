@@ -2,6 +2,7 @@ package net.alephdev;
 
 import net.alephdev.pages.LoginPage;
 import net.alephdev.pages.MainPage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -11,26 +12,28 @@ import java.time.Duration;
 public class Utils {
     private static final int CAPTCHA_TIMEOUT = 300;
 
+    protected static void clickAndWait(WebElement element, String name) throws InterruptedException {
+        clickAndWait(element, name, 1000);
+    }
+
+    protected static void clickAndWait(WebElement element, String name, int sleep) throws InterruptedException {
+        assert element.isDisplayed() : "Элемент " + name + " не отображается";
+        element.click();
+        Thread.sleep(sleep);
+    }
+
+    protected static void type(WebElement element, String text, String name) {
+        assert element.isDisplayed() : "Элемент " + name + " не отображается";
+        element.sendKeys(text);
+    }
+
     protected static void login(WebDriver driver) throws InterruptedException {
-        WebElement loginButton = LoginPage.getLoginButton(driver);
-        assert loginButton.isDisplayed() : "Кнопка логина не отображается на странице";
-        loginButton.click();
+        clickAndWait(LoginPage.getLoginButton(driver), "Кнопка логин");
+        clickAndWait(LoginPage.getLoginWithEmailAndPasswordButton(driver), "Кнопка логина с паролем", 2000);
+        type(LoginPage.getEmailField(driver), Properties.getProperty("email"), "Поле email");
+        type(LoginPage.getPasswordField(driver), Properties.getProperty("password"), "Поле пароля");
         Thread.sleep(1000);
-        WebElement loginWithEmailAndPasswordButton = LoginPage.getLoginWithEmailAndPasswordButton(driver);
-        assert loginWithEmailAndPasswordButton.isDisplayed() : "Кнопка логина с паролем не отображается на странице";
-        loginWithEmailAndPasswordButton.click();
-        Thread.sleep(2000);
-        WebElement emailField = LoginPage.getEmailField(driver);
-        assert emailField.isDisplayed() : "Поле email не отображается на странице";
-        emailField.sendKeys(Properties.getProperty("email"));
-        WebElement passwordField = LoginPage.getPasswordField(driver);
-        assert passwordField.isDisplayed() : "Поле пароля не отображается на странице";
-        passwordField.sendKeys(Properties.getProperty("password"));
-        Thread.sleep(1000);
-        WebElement submitButton = LoginPage.getSubmitButton(driver);
-        assert submitButton.isDisplayed() : "Кнопка отправки не отображается на странице";
-        submitButton.click();
-        Thread.sleep(2000);
+        clickAndWait(LoginPage.getSubmitButton(driver), "Кнопка отправки", 3000);
         assertPage(driver, "rating");
     }
 
@@ -54,7 +57,13 @@ public class Utils {
 
     protected static void assertPage(WebDriver driver, String path) throws InterruptedException {
         waitForCaptcha(driver);
-        assert driver.getCurrentUrl().startsWith(Properties.getProperty("base-url") + path)
-                : "Открылась страница: " + driver.getCurrentUrl() + ", ожидалась: " + Properties.getProperty("base-url") + path;
+        String expectedUrl = Properties.getProperty("base-url") + path;
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+            wait.until(webDriver -> webDriver.getCurrentUrl().startsWith(expectedUrl));
+        } catch (Exception e) {
+            assert driver.getCurrentUrl().startsWith(expectedUrl)
+                    : "Открылась страница: " + driver.getCurrentUrl() + ", ожидалась: " + expectedUrl;
+        }
     }
 }
