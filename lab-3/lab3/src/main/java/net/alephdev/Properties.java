@@ -1,27 +1,40 @@
 package net.alephdev;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Properties {
-    private static final Map<String, String> properties = new HashMap<>();
+    private static final Map<String, String> PROPERTIES = new HashMap<>();
 
     static {
-        try {
-            java.util.Properties prop = new java.util.Properties();
-            prop.load(Files.newInputStream(Paths.get("application.properties")));
-            for (String key : prop.stringPropertyNames()) {
-                properties.put(key, prop.getProperty(key));
+        try (InputStream input = Properties.class.getClassLoader()
+                .getResourceAsStream("application.properties")) {
+            
+            if (input == null) {
+                throw new RuntimeException("Файл application.properties не найден в classpath");
             }
-        } catch (IOException e) {
-            System.err.println("Не удалось загрузить файл свойств: " + e.getMessage());
+            
+            java.util.Properties props = new java.util.Properties();
+            props.load(input);
+            
+            for (String key : props.stringPropertyNames()) {
+                PROPERTIES.put(key, props.getProperty(key).trim());
+            }
+            
+        } catch (Exception e) {
+            throw new RuntimeException("Ошибка загрузки конфигурации", e);
         }
     }
 
     public static String getProperty(String name) {
-        return properties.get(name);
+        String value = PROPERTIES.get(name);
+        if (value == null || value.isEmpty()) {
+            throw new RuntimeException("Свойство '" + name + "' не найдено или пустое");
+        }
+        return value;
     }
 }
+
+
+

@@ -1,16 +1,16 @@
 package net.alephdev;
 
-import net.alephdev.pages.LoginPage;
-import net.alephdev.pages.MainPage;
-import org.openqa.selenium.By;
+import java.time.Duration;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
+import net.alephdev.pages.LoginPage;
+import net.alephdev.pages.MainPage;
 
 public class Utils {
-    private static final int CAPTCHA_TIMEOUT = 300;
+    protected static final int CAPTCHA_TIMEOUT = 300;
 
     protected static void clickAndWait(WebElement element, String name) throws InterruptedException {
         clickAndWait(element, name, 1000);

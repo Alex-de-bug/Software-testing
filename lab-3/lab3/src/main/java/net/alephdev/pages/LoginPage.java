@@ -20,4 +20,7 @@ public class LoginPage {
     public static WebElement getSubmitButton(WebDriver driver) {
         return driver.findElement(By.xpath("//button[@type='submit']"));
     }
+    public static WebElement getForgotButton(WebDriver driver) {
+        return driver.findElement(By.xpath("//a[@data-name='forgot-password-action']"));
+    }
 }
