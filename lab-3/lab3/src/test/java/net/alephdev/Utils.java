@@ -6,9 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import net.alephdev.pages.LoginPage;
-import net.alephdev.pages.MainPage;
-
 public class Utils {
     protected static final int CAPTCHA_TIMEOUT = 300;
 
@@ -27,36 +24,7 @@ public class Utils {
         element.sendKeys(text);
     }
 
-    protected static void login(WebDriver driver) throws InterruptedException {
-        clickAndWait(LoginPage.getLoginButton(driver), "Кнопка логин");
-        clickAndWait(LoginPage.getLoginWithEmailAndPasswordButton(driver), "Кнопка логина с паролем", 2000);
-        type(LoginPage.getEmailField(driver), Properties.getProperty("email"), "Поле email");
-        type(LoginPage.getPasswordField(driver), Properties.getProperty("password"), "Поле пароля");
-        Thread.sleep(1000);
-        clickAndWait(LoginPage.getSubmitButton(driver), "Кнопка отправки", 3000);
-        assertPage(driver, "rating");
-    }
-
-    protected static void waitForCaptcha(WebDriver driver) throws InterruptedException {
-        if (driver.getCurrentUrl().contains("/captcha")) {
-            System.out.println("Обнаружена капча. Ожидание ручного решения...");
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(CAPTCHA_TIMEOUT));
-            wait.until(webDriver -> !webDriver.getCurrentUrl().contains("/captcha"));
-            System.out.println("Капча пройдена. Продолжаем выполнение теста.");
-            removeDistractions(driver);
-        }
-    }
-
-    protected static void removeDistractions(WebDriver driver) throws InterruptedException {
-        Thread.sleep(1000);
-        WebElement distraction = MainPage.getDistraction(driver);
-        if (distraction != null && distraction.isDisplayed()) {
-            distraction.click();
-        }
-    }
-
-    protected static void assertPage(WebDriver driver, String path) throws InterruptedException {
-        waitForCaptcha(driver);
+    protected static void assertPage(WebDriver driver, String path) {
         String expectedUrl = Properties.getProperty("base-url") + path;
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
@@ -64,6 +32,16 @@ public class Utils {
         } catch (Exception e) {
             assert driver.getCurrentUrl().startsWith(expectedUrl)
                     : "Открылась страница: " + driver.getCurrentUrl() + ", ожидалась: " + expectedUrl;
+        }
+    }
+
+    protected static void assertDomain(WebDriver driver, String domain) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            wait.until(webDriver -> webDriver.getCurrentUrl().startsWith(domain));
+        } catch (Exception e) {
+            assert driver.getCurrentUrl().startsWith(domain)
+                    : "Открылась страница: " + driver.getCurrentUrl() + ", ожидалась: " + domain;
         }
     }
 }

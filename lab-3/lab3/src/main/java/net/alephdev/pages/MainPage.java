@@ -5,23 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class MainPage {
-    public static WebElement getDistraction(WebDriver driver) {
-        try {
-            return driver.findElement(By.xpath("//a[@data-name='close-action']"));
-        } catch (Exception e) {
-            return null;
-        }
+    public static void setFrame(WebDriver driver) {
+        driver.switchTo().frame("vpravo");
     }
-    public static WebElement getProfileButton(WebDriver driver) {
-        return driver.findElement(By.xpath("//a[@data-name='profile-action']"));
-    }
-    public static WebElement getEventsButton(WebDriver driver) {
-        return driver.findElement(By.xpath("//a[@data-name='events-action']"));
-    }
-    public static WebElement getRatingButton(WebDriver driver) {
-        return driver.findElement(By.xpath("//a[@data-name='link-main-menu__rating-action']"));
-    }
-    public static WebElement getSearchButton(WebDriver driver) {
-        return driver.findElement(By.xpath("//a[@data-name='link-main-menu__search-action']"));
+    public static WebElement getFlag(WebDriver driver, String flag) {
+        setFrame(driver);
+        return driver.findElement(By.xpath("//img[@src=\"images/" + flag + ".gif\"]/.."));
     }
 }
