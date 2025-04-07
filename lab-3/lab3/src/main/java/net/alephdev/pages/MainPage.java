@@ -12,4 +12,8 @@ public class MainPage {
         setFrame(driver);
         return driver.findElement(By.xpath("//img[@src=\"images/" + flag + ".gif\"]/.."));
     }
+    public static WebElement getEvacuation(WebDriver driver) {
+        setFrame(driver);
+        return driver.findElement(By.xpath("//img[@src=\"images/evakuace_ru.gif\"]/.."));
+    }
 }

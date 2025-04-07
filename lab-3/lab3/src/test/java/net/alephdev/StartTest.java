@@ -1,14 +1,16 @@
 package net.alephdev;
 
-import net.alephdev.pages.MainPage;
-import net.alephdev.pages.StartPages;
-import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.WebDriver;
+
+import net.alephdev.pages.Evakuace;
+import net.alephdev.pages.MainPage;
+import net.alephdev.pages.StartPages;
 
 class StartTest {
     private static WebDriver driver;
@@ -69,5 +71,33 @@ class StartTest {
         Utils.assertDomain(driver, Properties.getProperty("base-url"));
         Utils.clickAndWait(MainPage.getFlag(driver, flag), "Флаг" + flag, 0);
         Utils.assertDomain(driver, url);
+    }
+
+    @Test
+    void testEvacuation() throws InterruptedException {
+        driver.get(Properties.getProperty("base-url") + Properties.getProperty("start-page"));
+        Utils.assertDomain(driver, Properties.getProperty("base-url"));
+        Utils.clickAndWait(MainPage.getEvacuation(driver), "Эвакуация", 50);
+
+        Utils.clickAndWait(Evakuace.getEvacuationTerritories(driver), "Территории эвакуации", 5);
+        Utils.assertDomain(driver, "https://www.vesmirni-lide.cz/html/evakuace/evakuace_1.htm");
+
+        driver.navigate().back();
+
+        Utils.clickAndWait(Evakuace.getEvacuationSpaceShips(driver), "Космические корабли", 5);
+        Utils.assertDomain(driver, "https://www.vesmirni-lide.cz/html/evakuace/evakuace_2.htm");
+
+        driver.navigate().back();
+
+        Utils.clickAndWait(Evakuace.getEvacuationAccesses(driver), "Доступы", 5);
+        Utils.assertDomain(driver, "https://www.vesmirni-lide.cz/html/evakuace/evakuace_3.htm");
+
+        driver.navigate().back();
+
+        Utils.clickAndWait(Evakuace.getEvacuationUno(driver), "УНО", 5);
+        Utils.assertDomain(driver, "https://www.vesmirni-lide.cz/html/evakuace/evakuace_4.htm");
+
+        driver.navigate().back();
+        
     }
 }
