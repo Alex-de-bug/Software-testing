@@ -15,4 +15,10 @@ public class MainPage {
     public static WebElement getEvacuation(WebDriver driver) {
         return driver.findElement(By.xpath("//img[@src=\"images/evakuace_ru.gif\"]/.."));
     }
+    public static WebElement getTalkButton(WebDriver driver) {
+        return driver.findElement(By.xpath("//a[contains(@href,\"dil_ru.htm\")]"));
+    }
+    public static WebElement getAdvResButton(WebDriver driver) {
+        return driver.findElement(By.xpath("//a[contains(@href,\"http://www.universe-people.com/english/html/reklamni_prostredky/index_en.htm\")]"));
+    }
 }

@@ -1,5 +1,8 @@
 package net.alephdev;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -73,25 +76,42 @@ class StartTest {
         Utils.assertDomain(driver, url);
     }
 
-    @Test
-    void testEvacuation() throws InterruptedException {
+    @ParameterizedTest
+    @CsvSource({
+        "EVAKUAČNÍ TERITORIA, VESMÍRNÉ LODĚ, PŘÍSTUPY, OSN",
+        "EVACUATION TERRITORIES, SPACESHIPS, ACCESS, UNO",
+        "EVAKUIERUNGSTERRITORIEN, WELTRAUMSCHIFFE, ZUGRIFFE, OVN"
+    })
+    void testEvacuation(String territory, String spaceShip, String access, String uno) throws InterruptedException {
+
+        List<String> info = Arrays.asList(territory, spaceShip, access, uno);
+
         driver.get(Properties.getProperty("base-url") + Properties.getProperty("embedded-page"));
         Utils.assertDomain(driver, Properties.getProperty("base-url"));
         Utils.clickAndWait(MainPage.getEvacuation(driver), "Эвакуация", 500);
 
-        Utils.clickAndWait(Evakuace.getEvacuationTerritories(driver), "Территории эвакуации", 5);
-        Utils.assertFrameDomain(driver, "bottom", "https://www.vesmirni-lide.cz/html/evakuace/evakuace_1.htm");
-
-        Utils.clickAndWait(Evakuace.getEvacuationSpaceShips(driver), "Космические корабли", 5);
-        Utils.assertFrameDomain(driver, "bottom", "https://www.vesmirni-lide.cz/html/evakuace/evakuace_2.htm");
-
-        Utils.clickAndWait(Evakuace.getEvacuationAccesses(driver), "Доступы", 5);
-        Utils.assertFrameDomain(driver, "bottom", "https://www.vesmirni-lide.cz/html/evakuace/evakuace_3.htm");
-
-        Utils.clickAndWait(Evakuace.getEvacuationUno(driver), "УНО", 5);
-        Utils.assertFrameDomain(driver, "bottom", "https://www.vesmirni-lide.cz/html/evakuace/evakuace_4.htm");
+        for (int i = 0; i < 4; i++) {
+            Evakuace.frameBypass(driver);
+            Utils.clickAndWait(Evakuace.getEvacuationInfo(driver, info.get(i)), "Информация о спасении", 5);
+            Utils.assertFrameDomain(driver, "bottom", "https://www.vesmirni-lide.cz/html/evakuace/evakuace_" + (i + 1) + ".htm");
+        }
 
         driver.navigate().back();
-        
+    }
+
+    @Test
+    void needToTalk() throws InterruptedException {
+        driver.get(Properties.getProperty("base-url") + Properties.getProperty("embedded-page"));
+        Utils.assertDomain(driver, Properties.getProperty("base-url"));
+        Utils.clickAndWait(MainPage.getTalkButton(driver), "Разговоры с назиданием от друзей", 2);
+        Utils.assertDomain(driver, "http://angely-sveta.ru/russian/dil_ru.htm");
+    }
+
+    @Test
+    void getAdvertisingResources() throws InterruptedException {
+        driver.get(Properties.getProperty("base-url") + Properties.getProperty("embedded-page"));
+        Utils.assertDomain(driver, Properties.getProperty("base-url"));
+        Utils.clickAndWait(MainPage.getAdvResButton(driver), "Adv ресурсы", 2);
+        Utils.assertDomain(driver, "https://www.universe-people.com/english/html/reklamni_prostredky/index_en.htm");
     }
 }
