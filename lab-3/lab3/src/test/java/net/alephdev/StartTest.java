@@ -75,27 +75,21 @@ class StartTest {
 
     @Test
     void testEvacuation() throws InterruptedException {
-        driver.get(Properties.getProperty("base-url") + Properties.getProperty("start-page"));
+        driver.get(Properties.getProperty("base-url") + Properties.getProperty("embedded-page"));
         Utils.assertDomain(driver, Properties.getProperty("base-url"));
-        Utils.clickAndWait(MainPage.getEvacuation(driver), "Эвакуация", 50);
+        Utils.clickAndWait(MainPage.getEvacuation(driver), "Эвакуация", 500);
 
         Utils.clickAndWait(Evakuace.getEvacuationTerritories(driver), "Территории эвакуации", 5);
-        Utils.assertDomain(driver, "https://www.vesmirni-lide.cz/html/evakuace/evakuace_1.htm");
-
-        driver.navigate().back();
+        Utils.assertFrameDomain(driver, "bottom", "https://www.vesmirni-lide.cz/html/evakuace/evakuace_1.htm");
 
         Utils.clickAndWait(Evakuace.getEvacuationSpaceShips(driver), "Космические корабли", 5);
-        Utils.assertDomain(driver, "https://www.vesmirni-lide.cz/html/evakuace/evakuace_2.htm");
-
-        driver.navigate().back();
+        Utils.assertFrameDomain(driver, "bottom", "https://www.vesmirni-lide.cz/html/evakuace/evakuace_2.htm");
 
         Utils.clickAndWait(Evakuace.getEvacuationAccesses(driver), "Доступы", 5);
-        Utils.assertDomain(driver, "https://www.vesmirni-lide.cz/html/evakuace/evakuace_3.htm");
-
-        driver.navigate().back();
+        Utils.assertFrameDomain(driver, "bottom", "https://www.vesmirni-lide.cz/html/evakuace/evakuace_3.htm");
 
         Utils.clickAndWait(Evakuace.getEvacuationUno(driver), "УНО", 5);
-        Utils.assertDomain(driver, "https://www.vesmirni-lide.cz/html/evakuace/evakuace_4.htm");
+        Utils.assertFrameDomain(driver, "bottom", "https://www.vesmirni-lide.cz/html/evakuace/evakuace_4.htm");
 
         driver.navigate().back();
         
