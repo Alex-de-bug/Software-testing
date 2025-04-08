@@ -1,10 +1,13 @@
 package net.alephdev;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.Duration;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Utils {
@@ -62,5 +65,24 @@ public class Utils {
         String frameUrl = (String) jsExecutor.executeScript("return document.location.href");
         driver.switchTo().defaultContent();
         return frameUrl;
+    }
+
+    public static void getDownloadObject(WebDriver driver, WebElement downloadLink) throws Exception{
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(downloadLink));
+        String downloadUrl = downloadLink.getAttribute("href");
+        HttpURLConnection connection = (HttpURLConnection) new URL(downloadUrl).openConnection();
+        connection.setRequestMethod("HEAD");
+        int responseCode = connection.getResponseCode();
+        if (responseCode != HttpURLConnection.HTTP_OK) {
+            throw new Exception("File is not available for download. Response code: " + responseCode);
+        }
+                
+        long fileSize = connection.getContentLengthLong();
+        if (fileSize <= 0) {
+            throw new Exception("File size is 0 or not available");
+        }
+        
+        System.out.println("File is available for download. Size: " + fileSize + " bytes");
     }
 }

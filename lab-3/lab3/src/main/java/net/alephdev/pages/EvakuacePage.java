@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import net.alephdev.Properties;
 
-public class Evakuace {
+public class EvakuacePage {
     public static void frameBypass(WebDriver driver) {
         if(driver.getCurrentUrl().contains(Properties.getProperty("start-page"))) {
             driver.get(Properties.getProperty("base-url") + Properties.getProperty("embedded-page"));

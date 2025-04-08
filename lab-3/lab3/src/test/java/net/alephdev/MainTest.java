@@ -8,14 +8,15 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.WebDriver;
 
-import net.alephdev.pages.Evakuace;
+import net.alephdev.pages.EvakuacePage;
 import net.alephdev.pages.MainPage;
 import net.alephdev.pages.StartPages;
 
-class StartTest {
+class MainTest {
     private static WebDriver driver;
     @BeforeAll
     public static void setUpClass() throws InterruptedException {
@@ -91,8 +92,8 @@ class StartTest {
         Utils.clickAndWait(MainPage.getEvacuation(driver), "Эвакуация", 500);
 
         for (int i = 0; i < 4; i++) {
-            Evakuace.frameBypass(driver);
-            Utils.clickAndWait(Evakuace.getEvacuationInfo(driver, info.get(i)), "Информация о спасении", 5);
+            EvakuacePage.frameBypass(driver);
+            Utils.clickAndWait(EvakuacePage.getEvacuationInfo(driver, info.get(i)), "Информация о спасении", 5);
             Utils.assertFrameDomain(driver, "bottom", "https://www.vesmirni-lide.cz/html/evakuace/evakuace_" + (i + 1) + ".htm");
         }
 
@@ -114,4 +115,28 @@ class StartTest {
         Utils.clickAndWait(MainPage.getAdvResButton(driver), "Adv ресурсы", 2);
         Utils.assertDomain(driver, "https://www.universe-people.com/english/html/reklamni_prostredky/index_en.htm");
     }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/last_rev.csv", numLinesToSkip = 0)
+    void getReadLastCommits() throws InterruptedException {
+        driver.get(Properties.getProperty("base-url") + Properties.getProperty("embedded-page"));
+        Utils.assertDomain(driver, Properties.getProperty("base-url"));
+        Utils.clickAndWait(MainPage.getLastRev(driver), "Последняя актуализация", 2);
+        Utils.assertDomain(driver, "http://angely-sveta.ru/russian/zmeny_ru.htm");
+        
+        driver.navigate().back();
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/last_rev.csv", numLinesToSkip = 0)
+    void verifyLinksPresence(String href) throws InterruptedException {
+        driver.get(Properties.getProperty("base-url") + Properties.getProperty("embedded-page"));
+        Utils.assertDomain(driver, Properties.getProperty("base-url"));
+        Utils.clickAndWait(MainPage.getLastRev(driver), "Последняя актуализация", 2);
+        
+        MainPage.verifyLinkExists(driver, href);
+        
+        driver.navigate().back();
+    }
+
 }
