@@ -116,8 +116,7 @@ class MainTest {
         Utils.assertDomain(driver, "https://www.universe-people.com/english/html/reklamni_prostredky/index_en.htm");
     }
 
-    @ParameterizedTest
-    @CsvFileSource(resources = "/last_rev.csv", numLinesToSkip = 0)
+    @Test
     void getReadLastCommits() throws InterruptedException {
         driver.get(Properties.getProperty("base-url") + Properties.getProperty("embedded-page"));
         Utils.assertDomain(driver, Properties.getProperty("base-url"));

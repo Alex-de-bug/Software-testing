@@ -36,6 +36,7 @@ class AdvertisingMeansTest {
     void readWarningToPeople() throws InterruptedException {
         Utils.clickAndWait(AdvMeansPage.getWarnButton(driver), "Warn to people", 2);
         Utils.assertDomain(driver, "https://www.universe-people.com/english/html/reklamni_prostredky/varovani_lidem_en.htm");
+        driver.navigate().back();
     }
 
     @ParameterizedTest
