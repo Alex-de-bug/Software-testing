@@ -6,14 +6,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Drivers {
-
-    public static List<WebDriver> getAllDrivers() {
-        return new ArrayList<>(List.of(getDriver("chrome"), getDriver("firefox")));
-    }
 
     public static WebDriver getDriver() {
         return getDriver(Properties.getProperty("active-driver"));
@@ -35,7 +28,7 @@ public class Drivers {
                 }
                 System.setProperty("webdriver.chrome.driver", chromePath);
                 ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--remote-allow-origins=*");
+                chromeOptions.addArguments("--remote-allow-origins=*", "--wm-window-animations-disabled", "--animation-duration-scale=0");
                 webDriver = new ChromeDriver(chromeOptions);
                 break;
 
