@@ -101,19 +101,17 @@ class MainTest {
         driver.get(Properties.getProperty("base-url") + Properties.getProperty("embedded-page"));
         Utils.clickAndWait(MainPage.getLastRev(driver), "Последняя актуализация", 2);
         Utils.assertPage(driver, "russian/zmeny_ru.htm");
-        
-        driver.navigate().back();
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/last_rev.csv", numLinesToSkip = 0)
     void verifyLinksPresence(String href) throws InterruptedException {
-        driver.get(Properties.getProperty("base-url") + Properties.getProperty("embedded-page"));
-        Utils.clickAndWait(MainPage.getLastRev(driver), "Последняя актуализация", 2);
+        if(!Utils.checkJsDomain(driver, Properties.getProperty("base-url") + "russian/zmeny_ru.htm")) {
+            driver.get(Properties.getProperty("base-url") + Properties.getProperty("embedded-page"));
+            Utils.clickAndWait(MainPage.getLastRev(driver), "Последняя актуализация", 2);
+        }
         
         MainPage.verifyLinkExists(driver, href);
-        
-        driver.navigate().back();
     }
 
 }
