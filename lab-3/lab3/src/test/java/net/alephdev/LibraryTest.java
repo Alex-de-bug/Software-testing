@@ -1,7 +1,7 @@
 package net.alephdev;
 
 import net.alephdev.pages.CommonElements;
-import net.alephdev.pages.FilesPage;
+import net.alephdev.pages.LeftPanel;
 import net.alephdev.pages.LibraryPage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterAll;
@@ -26,7 +26,7 @@ class LibraryTest {
 
     @BeforeEach
     public void setUp() throws InterruptedException {
-        Utils.clickAndWait(FilesPage.getLibraryLink(driver), "Библиотека", 2);
+        Utils.clickAndWait(LeftPanel.getLibraryLink(driver), "Библиотека", 2);
         Utils.assertFrameDomain(driver, CommonElements.GENERAL_FRAME, "http://angely-sveta.ru/russian/biblioteka-sveta_ru.htm");
         driver.switchTo().frame(CommonElements.GENERAL_FRAME);
     }

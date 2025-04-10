@@ -1,7 +1,7 @@
 package net.alephdev;
 
 import net.alephdev.pages.CommonElements;
-import net.alephdev.pages.FilesPage;
+import net.alephdev.pages.LeftPanel;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -32,19 +32,19 @@ public class FilesTest {
 
     @Test
     void getLinks() throws InterruptedException {
-        Utils.clickAndWait(FilesPage.getPicturesLink(driver), "Картинки", 2);
+        Utils.clickAndWait(LeftPanel.getPicturesLink(driver), "Картинки", 2);
         Utils.assertFrameDomain(driver, CommonElements.GENERAL_FRAME, IMG_URL);
 
-        Utils.clickAndWait(FilesPage.getVideosLink(driver), "Видео", 2);
+        Utils.clickAndWait(LeftPanel.getVideosLink(driver), "Видео", 2);
         Utils.assertFrameDomain(driver, CommonElements.GENERAL_FRAME, VIDEO_URL);
 
-        Utils.clickAndWait(FilesPage.getAudiosLink(driver), "Аудио", 2);
+        Utils.clickAndWait(LeftPanel.getAudiosLink(driver), "Аудио", 2);
         Utils.assertFrameDomain(driver, CommonElements.GENERAL_FRAME, AUDIO_URL);
     }
 
-    void checkDomain(String domain, FilesPage.Type type) throws InterruptedException {
+    void checkDomain(String domain, LeftPanel.Type type) throws InterruptedException {
         if(!Utils.checkJsDomain(driver, domain)) {
-            Utils.clickAndWait(Objects.requireNonNull(FilesPage.getLink(driver, type)), type.name(), 2);
+            Utils.clickAndWait(Objects.requireNonNull(LeftPanel.getLink(driver, type)), type.name(), 2);
             Utils.assertFrameDomain(driver, CommonElements.GENERAL_FRAME, domain);
             driver.switchTo().frame(CommonElements.GENERAL_FRAME);
         }
@@ -53,7 +53,7 @@ public class FilesTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/csv/images.csv")
     void verifyImageDownload(String link) throws Exception {
-        checkDomain(IMG_URL, FilesPage.Type.PICTURES);
+        checkDomain(IMG_URL, LeftPanel.Type.PICTURES);
         WebElement downloadLink = CommonElements.getDownloadLink(driver, link);
         Utils.getDownloadObject(driver, downloadLink);
     }
@@ -61,7 +61,7 @@ public class FilesTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/csv/videos.csv")
     void verifyVideoDownload(String link) throws Exception {
-        checkDomain(VIDEO_URL, FilesPage.Type.VIDEOS);
+        checkDomain(VIDEO_URL, LeftPanel.Type.VIDEOS);
         WebElement downloadLink = CommonElements.getDownloadLink(driver, link);
         Utils.getDownloadObject(driver, downloadLink);
     }
@@ -69,7 +69,7 @@ public class FilesTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/csv/audios.csv")
     void verifyAudioDownload(String link) throws Exception {
-        checkDomain(AUDIO_URL, FilesPage.Type.AUDIOS);
+        checkDomain(AUDIO_URL, LeftPanel.Type.AUDIOS);
         WebElement downloadLink = CommonElements.getDownloadLink(driver, link);
         Utils.getDownloadObject(driver, downloadLink);
     }

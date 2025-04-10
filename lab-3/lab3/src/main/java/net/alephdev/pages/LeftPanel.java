@@ -4,26 +4,31 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class FilesPage {
+public class LeftPanel {
     public static void setFrame(WebDriver driver) {
         driver.switchTo().defaultContent();
         driver.switchTo().frame("Obsah");
     }
-    public static WebElement getLibraryLink(WebDriver driver) {
+    public static WebElement getBoldLink(WebDriver driver, String text) {
         setFrame(driver);
-        return driver.findElement(By.xpath("//b[contains(text(),\"Рекомендованная литература\")]/.."));
+        return driver.findElement(By.xpath("//b[contains(text(),\"" + text + "\")]/.."));
+    }
+    public static WebElement getRegularLink(WebDriver driver, String text) {
+        setFrame(driver);
+        return driver.findElement(By.xpath("//a[contains(text(),\"" + text + "\")]"));
+    }
+
+    public static WebElement getLibraryLink(WebDriver driver) {
+        return getBoldLink(driver, "Рекомендованная литература");
     }
     public static WebElement getPicturesLink(WebDriver driver) {
-        setFrame(driver);
-        return driver.findElement(By.xpath("//b[contains(text(),\"Картинки\")]/.."));
+        return getBoldLink(driver, "Картинки");
     }
     public static WebElement getVideosLink(WebDriver driver) {
-        setFrame(driver);
-        return driver.findElement(By.xpath("//a[contains(text(),\"Видео записи\")]"));
+        return getRegularLink(driver, "Видео записи");
     }
     public static WebElement getAudiosLink(WebDriver driver) {
-        setFrame(driver);
-        return driver.findElement(By.xpath("//a[contains(text(),\"Звуковые записи\")]"));
+        return getRegularLink(driver, "Звуковые записи");
     }
 
     public static WebElement getLink(WebDriver driver, Type type) {
