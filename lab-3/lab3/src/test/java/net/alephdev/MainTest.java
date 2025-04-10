@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.WebDriver;
 
-import net.alephdev.pages.EvakuacePage;
+import net.alephdev.pages.EvacuationPage;
 import net.alephdev.pages.MainPage;
 import net.alephdev.pages.StartPages;
 
@@ -28,11 +28,6 @@ class MainTest {
     public static void tearDownClass() {
         if (driver != null)
             driver.quit();
-    }
-
-    @AfterEach
-    public void tearDown() throws InterruptedException {
-        Thread.sleep(0);
     }
 
     @Test
@@ -74,8 +69,8 @@ class MainTest {
         Utils.clickAndWait(MainPage.getEvacuation(driver), "Эвакуация", 0);
 
         for (int i = 0; i < 4; i++) {
-            EvakuacePage.frameBypass(driver);
-            Utils.clickAndWait(EvakuacePage.getEvacuationInfo(driver, info.get(i)), "Информация о спасении", 5);
+            EvacuationPage.frameBypass(driver);
+            Utils.clickAndWait(EvacuationPage.getEvacuationInfo(driver, info.get(i)), "Информация о спасении", 5);
             Utils.assertFrameDomain(driver, "bottom", "https://www.vesmirni-lide.cz/html/evakuace/evakuace_" + (i + 1) + ".htm");
         }
 

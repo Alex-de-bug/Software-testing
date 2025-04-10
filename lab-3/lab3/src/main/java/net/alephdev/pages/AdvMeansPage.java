@@ -6,10 +6,10 @@ import org.openqa.selenium.WebElement;
 
 public class AdvMeansPage {
     public static WebElement getWarnButton(WebDriver driver) {
-        return driver.findElement(By.xpath("//a[contains(@href,\"varovani_lidem_en.htm\")]"));
+        return driver.findElement(By.xpath("//b[contains(text(),\"WARNING TO PEOPLE\")]/.."));
     }
 
     public static WebElement getLogosBannersButton(WebDriver driver) {
-        return driver.findElement(By.xpath("//a[contains(@href,\"loga_a_bannery_en.htm\")]"));
+        return driver.findElement(By.xpath("//a[contains(text(),\"Logos and banners\")]"));
     }
 }

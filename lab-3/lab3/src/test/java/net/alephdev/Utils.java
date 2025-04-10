@@ -12,10 +12,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Utils {
 
-    protected static void clickAndWait(WebElement element, String name) throws InterruptedException {
-        clickAndWait(element, name, 1000);
-    }
-
     protected static void clickAndWait(WebElement element, String name, int sleep) throws InterruptedException {
         assert element.isDisplayed() : "Элемент " + name + " не отображается";
         element.click();

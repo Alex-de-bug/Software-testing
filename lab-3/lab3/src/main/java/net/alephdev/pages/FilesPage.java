@@ -21,9 +21,6 @@ public class FilesPage {
         setFrame(driver);
         return driver.findElement(By.xpath("//a[contains(text(),\"Звуковые записи\")]"));
     }
-    public static WebElement getDownloadLink(WebDriver driver, String link) {
-        return driver.findElement(By.xpath("//a[contains(@href, '" + link + "')]"));
-    }
 
     public static WebElement getLink(WebDriver driver, Type type) {
         switch (type) {
