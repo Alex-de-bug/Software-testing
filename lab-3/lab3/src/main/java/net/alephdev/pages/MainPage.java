@@ -11,7 +11,6 @@ public class MainPage {
         driver.switchTo().frame("vpravo");
     }
     public static WebElement getFlag(WebDriver driver, String flag) {
-        setFrame(driver);
         return driver.findElement(By.xpath("//img[@src=\"images/" + flag + ".gif\"]/.."));
     }
     public static WebElement getEvacuation(WebDriver driver) {

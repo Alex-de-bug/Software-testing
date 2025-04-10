@@ -25,6 +25,4 @@ public class EvakuacePage {
         return wait.until(ExpectedConditions.elementToBeClickable(
             By.xpath("//a[contains(text(), '" + info + "') or contains(., '" + info + "')]")));
     }
-    
-
 }

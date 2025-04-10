@@ -19,10 +19,9 @@ import net.alephdev.pages.StartPages;
 class MainTest {
     private static WebDriver driver;
     @BeforeAll
-    public static void setUpClass() throws InterruptedException {
+    public static void setUpClass() {
         driver = Drivers.getDriver();
         driver.get(Properties.getProperty("base-url"));
-        Thread.sleep(2000);
     }
 
     @AfterAll
@@ -40,41 +39,23 @@ class MainTest {
     void testWebsiteEnter() throws InterruptedException {
         driver.get(Properties.getProperty("base-url"));
         Utils.assertDomain(driver, Properties.getProperty("base-url"));
-        Thread.sleep(1000);
-        for(int i = 0; i < 3; i++)
-            Utils.clickAndWait(StartPages.getNextButton(driver), "Следующая картинка");
+        Utils.clickAndWait(StartPages.getNextButton(driver), "Следующая картинка", 2);
+        Utils.assertPage(driver, "russian/default_2_ru.htm");
+        Utils.clickAndWait(StartPages.getNextButton(driver), "Следующая картинка", 2);
+        Utils.assertPage(driver, "russian/default_14_ru.htm");
+        Utils.clickAndWait(StartPages.getNextButton(driver), "Следующая картинка", 2);
         Utils.assertPage(driver, "russian/default_ru.htm");
     }
 
     @ParameterizedTest
-    @CsvSource({
-            "flag_czech, https://www.vesmirni-lide.cz/",
-            "flag_uk, https://www.universe-people.com/",
-            "flag_germany, http://www.himmels-engel.de/",
-            "flag_spain, http://www.angeles-luz.es/",
-            "flag_france, http://www.anges-lumiere.fr/",
-            "flag_italy, http://www.angelo-luce.it/",
-            "flag_poland, http://www.anioly-nieba.pl/",
-            "flag_hungary, http://www.feny-angyalai.hu/",
-            "flag_croatia, http://www.andjeli-neba.com.hr/",
-            "flag_portugal, http://www.anjos-ceu.eu/",
-            "flag_bulgaria, http://www.angeli-raja.eu/",
-            "flag_netherlands, http://www.engelen-hemel.nl/",
-            "flag_romania, http://www.ingerii-cerului.ro/",
-            "flag_norway, https://www.universe-people.com/norsk/",
-            "flag_sweden, http://www.himmelens-anglar.se/",
-            "flag_finland, https://www.universe-people.com/suomi/",
-            "flag_turkey, http://www.cennetin-melekleri.web.tr/",
-            "flag_slovenia, https://www.universe-people.com/slovenski/",
-            "flag_greece, https://www.universe-people.com/ellhnika/",
-            "flag_china, https://www.universe-people.com/chinese/",
-            "flag_syria, https://www.angels-light-arab.org/",
-    })
+    @CsvFileSource(resources = "/flags.csv")
     void testLanguagesByFlag(String flag, String url) throws InterruptedException {
-        driver.get(Properties.getProperty("base-url") + Properties.getProperty("start-page"));
-        Utils.assertDomain(driver, Properties.getProperty("base-url"));
+        if(!Utils.checkJsDomain(driver, Properties.getProperty("embedded-page"))) {
+            driver.get(Properties.getProperty("base-url") + Properties.getProperty("embedded-page"));
+        }
         Utils.clickAndWait(MainPage.getFlag(driver, flag), "Флаг" + flag, 0);
         Utils.assertDomain(driver, url);
+        driver.navigate().back();
     }
 
     @ParameterizedTest
@@ -87,9 +68,10 @@ class MainTest {
 
         List<String> info = Arrays.asList(territory, spaceShip, access, uno);
 
-        driver.get(Properties.getProperty("base-url") + Properties.getProperty("embedded-page"));
-        Utils.assertDomain(driver, Properties.getProperty("base-url"));
-        Utils.clickAndWait(MainPage.getEvacuation(driver), "Эвакуация", 500);
+        if(!Utils.checkJsDomain(driver, Properties.getProperty("embedded-page"))) {
+            driver.get(Properties.getProperty("base-url") + Properties.getProperty("embedded-page"));
+        }
+        Utils.clickAndWait(MainPage.getEvacuation(driver), "Эвакуация", 0);
 
         for (int i = 0; i < 4; i++) {
             EvakuacePage.frameBypass(driver);
@@ -103,15 +85,13 @@ class MainTest {
     @Test
     void needToTalk() throws InterruptedException {
         driver.get(Properties.getProperty("base-url") + Properties.getProperty("embedded-page"));
-        Utils.assertDomain(driver, Properties.getProperty("base-url"));
         Utils.clickAndWait(MainPage.getTalkButton(driver), "Разговоры с назиданием от друзей", 2);
-        Utils.assertDomain(driver, "http://angely-sveta.ru/russian/dil_ru.htm");
+        Utils.assertPage(driver, "russian/dil_ru.htm");
     }
 
     @Test
     void getAdvertisingResources() throws InterruptedException {
         driver.get(Properties.getProperty("base-url") + Properties.getProperty("embedded-page"));
-        Utils.assertDomain(driver, Properties.getProperty("base-url"));
         Utils.clickAndWait(MainPage.getAdvResButton(driver), "Adv ресурсы", 2);
         Utils.assertDomain(driver, "https://www.universe-people.com/english/html/reklamni_prostredky/index_en.htm");
     }
@@ -119,9 +99,8 @@ class MainTest {
     @Test
     void getReadLastCommits() throws InterruptedException {
         driver.get(Properties.getProperty("base-url") + Properties.getProperty("embedded-page"));
-        Utils.assertDomain(driver, Properties.getProperty("base-url"));
         Utils.clickAndWait(MainPage.getLastRev(driver), "Последняя актуализация", 2);
-        Utils.assertDomain(driver, "http://angely-sveta.ru/russian/zmeny_ru.htm");
+        Utils.assertPage(driver, "russian/zmeny_ru.htm");
         
         driver.navigate().back();
     }
@@ -130,7 +109,6 @@ class MainTest {
     @CsvFileSource(resources = "/last_rev.csv", numLinesToSkip = 0)
     void verifyLinksPresence(String href) throws InterruptedException {
         driver.get(Properties.getProperty("base-url") + Properties.getProperty("embedded-page"));
-        Utils.assertDomain(driver, Properties.getProperty("base-url"));
         Utils.clickAndWait(MainPage.getLastRev(driver), "Последняя актуализация", 2);
         
         MainPage.verifyLinkExists(driver, href);
