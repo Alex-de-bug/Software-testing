@@ -12,8 +12,4 @@ public class AdvMeansPage {
     public static WebElement getLogosBannersButton(WebDriver driver) {
         return driver.findElement(By.xpath("//a[contains(@href,\"loga_a_bannery_en.htm\")]"));
     }
-
-    public static WebElement getDownloadLink(WebDriver driver, String link) {
-        return driver.findElement(By.xpath("//a[contains(@href, '" + link + "')]"));
-    }
 }
