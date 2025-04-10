@@ -3,6 +3,7 @@ package net.alephdev;
 import java.util.Arrays;
 import java.util.List;
 
+import net.alephdev.pages.*;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -11,9 +12,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.WebDriver;
 
-import net.alephdev.pages.EvacuationPage;
-import net.alephdev.pages.MainPage;
-import net.alephdev.pages.StartPages;
+import org.openqa.selenium.WebElement;
 
 class MainTest {
     private static WebDriver driver;
@@ -108,4 +107,14 @@ class MainTest {
         MainPage.verifyLinkExists(driver, href);
     }
 
+    @ParameterizedTest
+    @CsvFileSource(resources = "/csv/left_links.csv")
+    void checkLeftLinks(String text, String href, boolean isBold) throws InterruptedException {
+        if(!Utils.checkJsDomain(driver, Properties.getProperty("base-url") + Properties.getProperty("start-page"))) {
+            driver.get(Properties.getProperty("base-url") + Properties.getProperty("start-page"));
+        }
+        WebElement element = isBold ? LeftPanel.getBoldLink(driver, text) : LeftPanel.getRegularLink(driver, text);
+        Utils.clickAndWait(element, text, 2);
+        Utils.assertFrameDomain(driver, CommonElements.GENERAL_FRAME, href);
+    }
 }
