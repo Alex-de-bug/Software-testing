@@ -51,20 +51,32 @@ public class Utils {
     protected static void assertFrameDomain(WebDriver driver, String frameName, String domain) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-            wait.until(webDriver -> getFrameUrl(webDriver, frameName).startsWith(domain));
+            wait.until(webDriver -> checkFrameDomain(webDriver, frameName, domain));
         } catch (Exception e) {
-            assert getFrameUrl(driver, frameName).startsWith(domain)
+            assert checkFrameDomain(driver, frameName, domain)
                     : "Фрейм открылся на: " + getFrameUrl(driver, frameName) + ", ожидался домен: " + domain;
         }
+    }
+
+    protected static boolean checkFrameDomain(WebDriver driver, String frameName, String domain) {
+        return getFrameUrl(driver, frameName).startsWith(domain);
+    }
+
+    protected static boolean checkJsDomain(WebDriver driver, String domain) {
+        return getUrlViaJs(driver).startsWith(domain);
     }
 
     public static String getFrameUrl(WebDriver driver, String frameName) {
         driver.switchTo().defaultContent();
         driver.switchTo().frame(frameName);
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        String frameUrl = (String) jsExecutor.executeScript("return document.location.href");
+        String frameUrl = getUrlViaJs(driver);
         driver.switchTo().defaultContent();
         return frameUrl;
+    }
+
+    public static String getUrlViaJs(WebDriver driver) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        return (String) jsExecutor.executeScript("return document.location.href");
     }
 
     public static void getDownloadObject(WebDriver driver, WebElement downloadLink) throws Exception{

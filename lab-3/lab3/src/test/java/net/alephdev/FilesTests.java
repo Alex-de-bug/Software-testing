@@ -11,6 +11,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class FilesTests {
+    private final String IMG_URL = "http://angely-sveta.ru/russian/obrazky_ru.htm";
+    private final String VIDEO_URL = "http://angely-sveta.ru/russian/video_ru.htm";
+    private final String AUDIO_URL = "http://angely-sveta.ru/russian/sound_ru.htm";
+
     private static WebDriver driver;
     @BeforeAll
     public static void setUpClass() {
@@ -41,12 +45,18 @@ public class FilesTests {
         Utils.assertFrameDomain(driver, "vpravo", "http://angely-sveta.ru/russian/sound_ru.htm");
     }
 
+    void checkDomain(String domain, FilesPage.Type type) throws InterruptedException {
+        if(!Utils.checkJsDomain(driver, domain)) {
+            Utils.clickAndWait(FilesPage.getLink(driver, type), type.name(), 2);
+            Utils.assertFrameDomain(driver, "vpravo", domain);
+            driver.switchTo().frame("vpravo");
+        }
+    }
+
     @ParameterizedTest
     @CsvFileSource(resources = "/images.csv")
     void verifyImageDownload(String link) throws Exception {
-        Utils.clickAndWait(FilesPage.getPicturesLink(driver), "Картинки", 2);
-        driver.switchTo().defaultContent();
-        driver.switchTo().frame("vpravo");
+        checkDomain(IMG_URL, FilesPage.Type.PICTURES);
         WebElement downloadLink = FilesPage.getDownloadLink(driver, link);
         Utils.getDownloadObject(driver, downloadLink);
     }
@@ -54,9 +64,7 @@ public class FilesTests {
     @ParameterizedTest
     @CsvFileSource(resources = "/videos.csv")
     void verifyVideoDownload(String link) throws Exception {
-        Utils.clickAndWait(FilesPage.getVideosLink(driver), "Видео", 2);
-        driver.switchTo().defaultContent();
-        driver.switchTo().frame("vpravo");
+        checkDomain(VIDEO_URL, FilesPage.Type.VIDEOS);
         WebElement downloadLink = FilesPage.getDownloadLink(driver, link);
         Utils.getDownloadObject(driver, downloadLink);
     }
@@ -64,9 +72,7 @@ public class FilesTests {
     @ParameterizedTest
     @CsvFileSource(resources = "/audios.csv")
     void verifyAudioDownload(String link) throws Exception {
-        Utils.clickAndWait(FilesPage.getAudiosLink(driver), "Аудио", 2);
-        driver.switchTo().defaultContent();
-        driver.switchTo().frame("vpravo");
+        checkDomain(AUDIO_URL, FilesPage.Type.AUDIOS);
         WebElement downloadLink = FilesPage.getDownloadLink(driver, link);
         Utils.getDownloadObject(driver, downloadLink);
     }
