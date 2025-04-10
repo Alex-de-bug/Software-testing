@@ -74,7 +74,7 @@ class MainTest {
             Utils.assertFrameDomain(driver, "bottom", "https://www.vesmirni-lide.cz/html/evakuace/evakuace_" + (i + 1) + ".htm");
         }
 
-        driver.navigate().back();
+        driver.get(Properties.getProperty("base-url") + Properties.getProperty("embedded-page"));
     }
 
     @Test

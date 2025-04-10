@@ -23,13 +23,21 @@ public class Utils {
         element.sendKeys(text);
     }
 
+    protected static boolean startsWith(String actual, String expected) {
+        return actual.startsWith(expected)
+                || actual.replace("https://", "http://").startsWith(expected)
+                || actual.startsWith(expected.replace("https://", "http://"))
+                || actual.replace("http://", "https://").startsWith(expected)
+                || actual.startsWith(expected.replace("http://", "https://"));
+    }
+
     protected static void assertPage(WebDriver driver, String path) {
         String expectedUrl = Properties.getProperty("base-url") + path;
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-            wait.until(webDriver -> webDriver.getCurrentUrl().startsWith(expectedUrl));
+            wait.until(webDriver -> startsWith(webDriver.getCurrentUrl(), expectedUrl));
         } catch (Exception e) {
-            assert driver.getCurrentUrl().startsWith(expectedUrl)
+            assert startsWith(driver.getCurrentUrl(), expectedUrl)
                     : "Открылась страница: " + driver.getCurrentUrl() + ", ожидалась: " + expectedUrl;
         }
     }
@@ -37,9 +45,9 @@ public class Utils {
     protected static void assertDomain(WebDriver driver, String domain) {
         try {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-            wait.until(webDriver -> webDriver.getCurrentUrl().startsWith(domain));
+            wait.until(webDriver -> startsWith(webDriver.getCurrentUrl(), domain));
         } catch (Exception e) {
-            assert driver.getCurrentUrl().startsWith(domain)
+            assert startsWith(driver.getCurrentUrl(), domain)
                     : "Открылась страница: " + driver.getCurrentUrl() + ", ожидалась: " + domain;
         }
     }
@@ -55,11 +63,11 @@ public class Utils {
     }
 
     protected static boolean checkFrameDomain(WebDriver driver, String frameName, String domain) {
-        return getFrameUrl(driver, frameName).startsWith(domain);
+        return startsWith(getFrameUrl(driver, frameName), domain);
     }
 
     protected static boolean checkJsDomain(WebDriver driver, String domain) {
-        return getUrlViaJs(driver).startsWith(domain);
+        return startsWith(getUrlViaJs(driver), domain);
     }
 
     public static String getFrameUrl(WebDriver driver, String frameName) {

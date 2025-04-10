@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,27 +25,40 @@ public class Drivers {
             throw new RuntimeException("active-driver не установлен в application.properties");
         }
 
+        WebDriver webDriver;
+
         switch (driver.toLowerCase()) {
             case "chrome":
                 String chromePath = Properties.getProperty("chrome-driver-path");
-                if (chromePath == null || chromePath.isEmpty()) {
+                if (chromePath.isEmpty()) {
                     throw new RuntimeException("chrome-driver-path не установлен в application.properties");
                 }
                 System.setProperty("webdriver.chrome.driver", chromePath);
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("--remote-allow-origins=*", "--start-maximized");
-                return new ChromeDriver(options);
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--remote-allow-origins=*");
+                webDriver = new ChromeDriver(chromeOptions);
+                break;
 
             case "firefox":
                 String firefoxPath = Properties.getProperty("firefox-driver-path");
-                if (firefoxPath == null || firefoxPath.isEmpty()) {
+                if (firefoxPath.isEmpty()) {
                     throw new RuntimeException("firefox-driver-path не установлен в application.properties");
                 }
                 System.setProperty("webdriver.gecko.driver", firefoxPath);
-                return new FirefoxDriver();
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                firefoxOptions.addPreference("permissions.default.image", 2);
+                firefoxOptions.addPreference("toolkit.cosmeticAnimations.enabled", false);
+                firefoxOptions.addPreference("webdriver.load.strategy", "eager");
+                firefoxOptions.addPreference("browser.cache.disk.enable", true);
+                firefoxOptions.addPreference("browser.cache.memory.enable", true);
+                //firefoxOptions.setHeadless(true);
+                webDriver = new FirefoxDriver(firefoxOptions);
+                break;
 
             default:
                 throw new RuntimeException("Некорректный драйвер: " + driver + ". Поддерживаются: chrome, firefox");
         }
+
+        return webDriver;
     }
 }
