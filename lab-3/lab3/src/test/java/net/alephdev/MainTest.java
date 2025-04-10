@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -43,7 +42,7 @@ class MainTest {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/flags.csv")
+    @CsvFileSource(resources = "/csv/flags.csv")
     void testLanguagesByFlag(String flag, String url) throws InterruptedException {
         if(!Utils.checkJsDomain(driver, Properties.getProperty("embedded-page"))) {
             driver.get(Properties.getProperty("base-url") + Properties.getProperty("embedded-page"));
@@ -99,7 +98,7 @@ class MainTest {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/last_rev.csv", numLinesToSkip = 0)
+    @CsvFileSource(resources = "/csv/last_rev.csv", numLinesToSkip = 0)
     void verifyLinksPresence(String href) throws InterruptedException {
         if(!Utils.checkJsDomain(driver, Properties.getProperty("base-url") + "russian/zmeny_ru.htm")) {
             driver.get(Properties.getProperty("base-url") + Properties.getProperty("embedded-page"));

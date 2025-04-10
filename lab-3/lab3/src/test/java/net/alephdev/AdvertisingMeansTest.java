@@ -2,7 +2,6 @@ package net.alephdev;
 
 import net.alephdev.pages.CommonElements;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -36,7 +35,7 @@ class AdvertisingMeansTest {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/download_files_warn.csv", numLinesToSkip = 0)
+    @CsvFileSource(resources = "/csv/download_files_warn.csv", numLinesToSkip = 0)
     void verifyFileDownloadWarnPeople(String link) throws Exception {
         Utils.clickAndWait(AdvMeansPage.getWarnButton(driver), "Warn to people", 2);
         WebElement downloadLink = CommonElements.getDownloadLink(driver, link);
@@ -45,7 +44,7 @@ class AdvertisingMeansTest {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/download_files_logos.csv", numLinesToSkip = 0)
+    @CsvFileSource(resources = "/csv/download_files_logos.csv", numLinesToSkip = 0)
     void verifyFileDownloadLogosAndBanners(String link) throws Exception {
         Utils.clickAndWait(AdvMeansPage.getLogosBannersButton(driver), "Logos and banners", 2);
         WebElement downloadLink = CommonElements.getDownloadLink(driver, link);

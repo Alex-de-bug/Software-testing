@@ -9,6 +9,10 @@ public class FilesPage {
         driver.switchTo().defaultContent();
         driver.switchTo().frame("Obsah");
     }
+    public static WebElement getLibraryLink(WebDriver driver) {
+        setFrame(driver);
+        return driver.findElement(By.xpath("//b[contains(text(),\"Рекомендованная литература\")]/.."));
+    }
     public static WebElement getPicturesLink(WebDriver driver) {
         setFrame(driver);
         return driver.findElement(By.xpath("//b[contains(text(),\"Картинки\")]/.."));
