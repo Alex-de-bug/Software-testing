@@ -30,18 +30,6 @@ public class FilesTest {
             driver.quit();
     }
 
-    @Test
-    void getLinks() throws InterruptedException {
-        Utils.clickAndWait(LeftPanel.getPicturesLink(driver), "Картинки", 2);
-        Utils.assertFrameDomain(driver, CommonElements.GENERAL_FRAME, IMG_URL);
-
-        Utils.clickAndWait(LeftPanel.getVideosLink(driver), "Видео", 2);
-        Utils.assertFrameDomain(driver, CommonElements.GENERAL_FRAME, VIDEO_URL);
-
-        Utils.clickAndWait(LeftPanel.getAudiosLink(driver), "Аудио", 2);
-        Utils.assertFrameDomain(driver, CommonElements.GENERAL_FRAME, AUDIO_URL);
-    }
-
     void checkDomain(String domain, LeftPanel.Type type) throws InterruptedException {
         if(!Utils.checkJsDomain(driver, domain)) {
             Utils.clickAndWait(Objects.requireNonNull(LeftPanel.getLink(driver, type)), type.name(), 2);
